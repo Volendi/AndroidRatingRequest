@@ -36,4 +36,16 @@ public class RatingRequestDialogItem extends LinearLayout {
         declineButton = (Button) findViewById(R.id.decline_btn);
     }
     //endregion Init
+
+    public boolean isShown(){
+        return getVisibility() == VISIBLE;
+    }
+
+    public void show(){
+        setVisibility(VISIBLE);
+    }
+
+    public void hide(){
+        setVisibility(GONE);
+    }
 }
