@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     tools:context="com.volen.ratingraquest.samples.MainActivity">
 
-    <com.volen.ratingrequest.RatingRequestDialogItem
+    <com.volen.ratingrequest.RatingRequestView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
     
