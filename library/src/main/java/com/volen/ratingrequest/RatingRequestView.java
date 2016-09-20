@@ -152,4 +152,16 @@ public class RatingRequestView extends FrameLayout {
     public void setOnRatingRequestResult(OnRatingRequestResultListener listener){
         onRatingRequestResultListener = listener;
     }
+
+    public void show(){
+        setVisibility(VISIBLE);
+    }
+
+    public void hide(){
+        setVisibility(GONE);
+    }
+
+    public boolean isShown(){
+        return getVisibility() == VISIBLE;
+    }
 }
