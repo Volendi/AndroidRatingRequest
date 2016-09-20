@@ -38,7 +38,7 @@ public class RatingRequestView extends FrameLayout {
 
     //region Init
     private void init(){
-        mainView = inflate(getContext(), R.layout.rating_request_dialog_item, this);
+        mainView = inflate(getContext(), R.layout.layout_rating_request, this);
 
         state = NUDGE;
 
