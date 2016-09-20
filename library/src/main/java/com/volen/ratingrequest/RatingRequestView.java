@@ -27,6 +27,15 @@ public class RatingRequestView extends FrameLayout {
 
     private @RatingRequestView.State int state;
 
+    private OnRatingRequestResultListener onRatingRequestResultListener;
+
+    public interface OnRatingRequestResultListener{
+        void onRating();
+        void onRatingDeclined();
+        void onFeedback();
+        void onFeedbackDeclined();
+    }
+
     public RatingRequestView(Context context) {
         super(context);
     }
@@ -63,6 +72,34 @@ public class RatingRequestView extends FrameLayout {
             @Override
             public void onDecline() {
                 setState(FEEDBACK);
+            }
+        });
+
+        ratingView.setOnDecisionListener(new RatingRequestDialogItem.OnDecisionListener() {
+            @Override
+            public void onAccept() {
+                if (onRatingRequestResultListener != null)
+                    onRatingRequestResultListener.onRating();
+            }
+
+            @Override
+            public void onDecline() {
+                if (onRatingRequestResultListener != null)
+                    onRatingRequestResultListener.onFeedbackDeclined();
+            }
+        });
+
+        feedbackView.setOnDecisionListener(new RatingRequestDialogItem.OnDecisionListener() {
+            @Override
+            public void onAccept() {
+                if (onRatingRequestResultListener != null)
+                    onRatingRequestResultListener.onFeedback();
+            }
+
+            @Override
+            public void onDecline() {
+                if (onRatingRequestResultListener != null)
+                    onRatingRequestResultListener.onFeedbackDeclined();
             }
         });
     }
@@ -110,5 +147,9 @@ public class RatingRequestView extends FrameLayout {
         }
 
         this.state = state;
+    }
+
+    public void setOnRatingRequestResult(OnRatingRequestResultListener listener){
+        onRatingRequestResultListener = listener;
     }
 }
