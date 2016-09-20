@@ -3,6 +3,7 @@ package com.volen.ratingrequest;
 import android.content.Context;
 import android.media.Rating;
 import android.support.annotation.IntDef;
+import android.support.annotation.MainThread;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.View;
@@ -12,7 +13,6 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
 public class RatingRequestView extends FrameLayout {
-    private View mainView;
     private RatingRequestDialogItem nudgeView;
     private RatingRequestDialogItem ratingView;
     private RatingRequestDialogItem feedbackView;
@@ -30,10 +30,10 @@ public class RatingRequestView extends FrameLayout {
     private OnRatingRequestResultListener onRatingRequestResultListener;
 
     public interface OnRatingRequestResultListener{
-        void onRating();
-        void onRatingDeclined();
-        void onFeedback();
-        void onFeedbackDeclined();
+        void onRating(RatingRequestView view);
+        void onRatingDeclined(RatingRequestView view);
+        void onFeedback(RatingRequestView view);
+        void onFeedbackDeclined(RatingRequestView view);
     }
 
     public RatingRequestView(Context context) {
@@ -48,7 +48,7 @@ public class RatingRequestView extends FrameLayout {
 
     //region Init
     private void init(){
-        mainView = inflate(getContext(), R.layout.layout_rating_request, this);
+        inflate(getContext(), R.layout.layout_rating_request, this);
 
         state = NUDGE;
 
@@ -65,41 +65,41 @@ public class RatingRequestView extends FrameLayout {
     private void initActions(){
         nudgeView.setOnDecisionListener(new RatingRequestDialogItem.OnDecisionListener() {
             @Override
-            public void onAccept() {
+            public void onAccept(RatingRequestDialogItem view) {
                 setState(RATING);
             }
 
             @Override
-            public void onDecline() {
+            public void onDecline(RatingRequestDialogItem view) {
                 setState(FEEDBACK);
             }
         });
 
         ratingView.setOnDecisionListener(new RatingRequestDialogItem.OnDecisionListener() {
             @Override
-            public void onAccept() {
+            public void onAccept(RatingRequestDialogItem view) {
                 if (onRatingRequestResultListener != null)
-                    onRatingRequestResultListener.onRating();
+                    onRatingRequestResultListener.onRating(getView());
             }
 
             @Override
-            public void onDecline() {
+            public void onDecline(RatingRequestDialogItem view) {
                 if (onRatingRequestResultListener != null)
-                    onRatingRequestResultListener.onFeedbackDeclined();
+                    onRatingRequestResultListener.onFeedbackDeclined(getView());
             }
         });
 
         feedbackView.setOnDecisionListener(new RatingRequestDialogItem.OnDecisionListener() {
             @Override
-            public void onAccept() {
+            public void onAccept(RatingRequestDialogItem view) {
                 if (onRatingRequestResultListener != null)
-                    onRatingRequestResultListener.onFeedback();
+                    onRatingRequestResultListener.onFeedback(getView());
             }
 
             @Override
-            public void onDecline() {
+            public void onDecline(RatingRequestDialogItem view) {
                 if (onRatingRequestResultListener != null)
-                    onRatingRequestResultListener.onFeedbackDeclined();
+                    onRatingRequestResultListener.onFeedbackDeclined(getView());
             }
         });
     }
@@ -163,5 +163,9 @@ public class RatingRequestView extends FrameLayout {
 
     public boolean isShown(){
         return getVisibility() == VISIBLE;
+    }
+
+    protected RatingRequestView getView(){
+        return this;
     }
 }

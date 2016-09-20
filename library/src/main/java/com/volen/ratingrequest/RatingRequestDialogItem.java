@@ -8,8 +8,7 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-public class RatingRequestDialogItem extends LinearLayout {
-    private View mainView;
+public class RatingRequestDialogItem extends LinearLayout {;
     private TextView text;
     private Button acceptButton;
     private Button declineButton;
@@ -17,8 +16,8 @@ public class RatingRequestDialogItem extends LinearLayout {
     private OnDecisionListener onDecisionListener;
 
     public interface OnDecisionListener{
-        void onAccept();
-        void onDecline();
+        void onAccept(RatingRequestDialogItem view);
+        void onDecline(RatingRequestDialogItem view);
     }
 
     public RatingRequestDialogItem(Context context) {
@@ -33,7 +32,7 @@ public class RatingRequestDialogItem extends LinearLayout {
 
     //region Init
     private void init(){
-        mainView = inflate(getContext(), R.layout.rating_request_dialog_item, this);
+        inflate(getContext(), R.layout.rating_request_dialog_item, this);
 
         initUi();
         initActions();
@@ -50,7 +49,7 @@ public class RatingRequestDialogItem extends LinearLayout {
             @Override
             public void onClick(View view) {
                 if (onDecisionListener != null)
-                    onDecisionListener.onAccept();
+                    onDecisionListener.onAccept(getView());
             }
         });
 
@@ -58,7 +57,7 @@ public class RatingRequestDialogItem extends LinearLayout {
             @Override
             public void onClick(View view) {
                 if (onDecisionListener != null)
-                    onDecisionListener.onDecline();
+                    onDecisionListener.onDecline(getView());
             }
         });
     }
@@ -135,5 +134,9 @@ public class RatingRequestDialogItem extends LinearLayout {
 
     public void setOnDecisionListener(OnDecisionListener onDecisionListener){
         this.onDecisionListener = onDecisionListener;
+    }
+
+    private RatingRequestDialogItem getView(){
+        return this;
     }
 }
