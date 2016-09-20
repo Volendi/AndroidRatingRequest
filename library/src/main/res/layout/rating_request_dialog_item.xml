@@ -7,7 +7,7 @@
     <TextView
         android:id="@+id/text"
         style="@style/RateDialog.Text"
-        android:text="Enjoying Bitxfy?"/>
+        android:text="Enjoying App?"/>
 
     <LinearLayout
         android:layout_width="match_parent"

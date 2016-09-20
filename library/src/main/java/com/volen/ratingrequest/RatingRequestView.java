@@ -3,6 +3,7 @@ package com.volen.ratingrequest;
 import android.content.Context;
 import android.media.Rating;
 import android.support.annotation.IntDef;
+import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -66,6 +67,23 @@ public class RatingRequestView extends FrameLayout {
         });
     }
     //endregion Init
+
+    //region Text
+    public void setNudgeViewText(@Nullable String mainText, @Nullable String acceptButtonText,
+                                 @Nullable String declineButtonText){
+        nudgeView.setText(mainText, acceptButtonText, declineButtonText);
+    }
+
+    public void setRatingViewText(@Nullable String mainText, @Nullable String acceptButtonText,
+                                 @Nullable String declineButtonText){
+        ratingView.setText(mainText, acceptButtonText, declineButtonText);
+    }
+
+    public void setFeedbackViewText(@Nullable String mainText, @Nullable String acceptButtonText,
+                                 @Nullable String declineButtonText){
+        feedbackView.setText(mainText, acceptButtonText, declineButtonText);
+    }
+    //endregion Text
 
     public int getState(){
         return state;

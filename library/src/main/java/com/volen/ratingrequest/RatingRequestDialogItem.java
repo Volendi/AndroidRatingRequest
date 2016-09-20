@@ -1,6 +1,7 @@
 package com.volen.ratingrequest;
 
 import android.content.Context;
+import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.Button;
@@ -62,6 +63,63 @@ public class RatingRequestDialogItem extends LinearLayout {
         });
     }
     //endregion Init
+
+    //region Text
+    public void setText(@Nullable String mainText, @Nullable String acceptButtonText,
+                        @Nullable String declineButtonText){
+        if (mainText != null)
+            setMainText(mainText);
+
+        if (acceptButtonText != null)
+            setAcceptButtonText(acceptButtonText);
+
+        if (declineButtonText != null)
+            setDeclineButtonText(declineButtonText);
+    }
+
+    public void setText(int mainTextResId, int acceptButtonTextResId,
+                        int declineButtonTextResId){
+        setMainText(mainTextResId);
+        setAcceptButtonText(acceptButtonTextResId);
+        setDeclineButtonText(declineButtonTextResId);
+    }
+
+    public void setMainText(CharSequence text){
+        this.text.setText(text);
+    }
+
+    public void setMainText(int resId){
+        this.text.setText(resId);
+    }
+
+    public CharSequence getMainText(){
+        return text.getText();
+    }
+
+    public void setAcceptButtonText(CharSequence text){
+        acceptButton.setText(text);
+    }
+
+    public void setAcceptButtonText(int resId){
+        acceptButton.setText(resId);
+    }
+
+    public CharSequence getAcceptButtonText(){
+        return acceptButton.getText();
+    }
+
+    public void setDeclineButtonText(CharSequence text){
+        declineButton.setText(text);
+    }
+
+    public void setDeclineButtonText(int resId){
+        declineButton.setText(resId);
+    }
+
+    public CharSequence getDeclineButtonText(){
+        return declineButton.getText();
+    }
+    //endregion Text
 
     public boolean isShown(){
         return getVisibility() == VISIBLE;

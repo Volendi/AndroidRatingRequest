@@ -6,6 +6,7 @@
     tools:context="com.volen.ratingraquest.samples.MainActivity">
 
     <com.volen.ratingrequest.RatingRequestView
+        android:id="@+id/rating_request"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
     
