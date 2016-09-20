@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/RateDialog">
+
+    <com.volen.ratingrequest.RatingRequestDialogItem
+        android:id="@+id/nudge"
+        style="@style/RateDialog.Handler"/>
+
+    <com.volen.ratingrequest.RatingRequestDialogItem
+        android:id="@+id/rating"
+        style="@style/RateDialog.Handler"
+        android:visibility="gone"/>
+
+    <com.volen.ratingrequest.RatingRequestDialogItem
+        android:id="@+id/feedback"
+        style="@style/RateDialog.Handler"
+        android:visibility="gone"/>
+
+</FrameLayout>

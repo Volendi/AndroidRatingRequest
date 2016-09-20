@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="default_background">@color/teal_500</color>
+    <color name="default_text">@color/white</color>
+    <color name="default_buttons">@color/white</color>
+
+    <color name="teal_500">#009688</color>
+
+    <color name="white">#FFFFFF</color>
+
+</resources>
