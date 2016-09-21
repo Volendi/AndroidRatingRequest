@@ -13,4 +13,15 @@
         <attr name="rr_declineButtonBackground" format="integer"/>
         <attr name="rr_declineButtonTextColor" format="color"/>
     </declare-styleable>
+    <declare-styleable name="RatingRequestViewText">
+        <attr name="rr_nudgeAcceptBtnText" format="string"/>
+        <attr name="rr_nudgeDeclineBtnText" format="string"/>
+        <attr name="rr_nudgeMainText" format="string"/>
+        <attr name="rr_ratingAcceptBtnText" format="string"/>
+        <attr name="rr_ratingDeclineBtnText" format="string"/>
+        <attr name="rr_ratingMainText" format="string"/>
+        <attr name="rr_feedbackAcceptBtnText" format="string"/>
+        <attr name="rr_feedbackDeclineBtnText" format="string"/>
+        <attr name="rr_feedbackMainText" format="string"/>
+    </declare-styleable>
 </resources>

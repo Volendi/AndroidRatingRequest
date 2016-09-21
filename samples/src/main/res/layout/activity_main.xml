@@ -11,6 +11,15 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:rr_backgroundColor="@color/colorPrimaryDark"
-        app:rr_textColor="@color/colorAccent"/>
+        app:rr_textColor="@color/white"
+        app:rr_nudgeMainText="Enjoying App?"
+        app:rr_nudgeAcceptBtnText="Yes"
+        app:rr_nudgeDeclineBtnText="Not really"
+        app:rr_ratingMainText="How about a rating in the Google Play then?"
+        app:rr_ratingAcceptBtnText="Yes, sure"
+        app:rr_ratingDeclineBtnText="No, thanks"
+        app:rr_feedbackMainText="Would you mind giving us some feedback?"
+        app:rr_feedbackAcceptBtnText="Yes, sure"
+        app:rr_feedbackDeclineBtnText="No, thanks"/>
     
 </RelativeLayout>
