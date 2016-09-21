@@ -1,6 +1,7 @@
 package com.volen.ratingrequest;
 
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.View;
@@ -28,6 +29,7 @@ public class RatingRequestDialogItem extends LinearLayout {;
         super(context, attrs);
 
         init();
+        parseAttrs(attrs);
     }
 
     //region Init
@@ -61,6 +63,28 @@ public class RatingRequestDialogItem extends LinearLayout {;
             }
         });
     }
+
+    //region Attrs
+    private void parseAttrs(AttributeSet attrs){
+        if (attrs == null)
+            return;
+
+        parseTextAttrs(attrs);
+    }
+
+    private void parseTextAttrs(AttributeSet attrs){
+        TypedArray arr = getContext().obtainStyledAttributes(attrs, R.styleable.RatingRequestDialogItemText);
+
+        if (arr == null)
+            return;
+
+        setText(arr.getString(R.styleable.RatingRequestDialogItemText_rr_mainText),
+                arr.getString(R.styleable.RatingRequestDialogItemText_rr_acceptBtnText),
+                arr.getString(R.styleable.RatingRequestDialogItemText_rr_declineBtnText));
+
+        arr.recycle();
+    }
+    //endregion Attrs
     //endregion Init
 
     //region Text

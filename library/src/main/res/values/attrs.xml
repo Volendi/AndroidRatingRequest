@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="RatingRequestDialogItemText">
+        <attr name="rr_acceptBtnText" format="string"/>
+        <attr name="rr_declineBtnText" format="string"/>
+        <attr name="rr_mainText" format="string"/>
+    </declare-styleable>
+</resources>
