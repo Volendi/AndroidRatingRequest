@@ -2,6 +2,11 @@ package com.volen.ratingrequest;
 
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.graphics.ColorFilter;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.GradientDrawable;
+import android.graphics.drawable.ShapeDrawable;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.View;
@@ -10,6 +15,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 public class RatingRequestDialogItem extends LinearLayout {;
+    private View handler;
     private TextView text;
     private Button acceptButton;
     private Button declineButton;
@@ -41,6 +47,7 @@ public class RatingRequestDialogItem extends LinearLayout {;
     }
 
     private void initUi(){
+        handler = findViewById(R.id.handler);
         text = (TextView) findViewById(R.id.text);
         acceptButton = (Button) findViewById(R.id.accept_btn);
         declineButton = (Button) findViewById(R.id.decline_btn);
@@ -70,6 +77,7 @@ public class RatingRequestDialogItem extends LinearLayout {;
             return;
 
         parseTextAttrs(attrs);
+        parseStylingAttrs(attrs);
     }
 
     private void parseTextAttrs(AttributeSet attrs){
@@ -81,6 +89,20 @@ public class RatingRequestDialogItem extends LinearLayout {;
         setText(arr.getString(R.styleable.RatingRequestDialogItemText_rr_mainText),
                 arr.getString(R.styleable.RatingRequestDialogItemText_rr_acceptBtnText),
                 arr.getString(R.styleable.RatingRequestDialogItemText_rr_declineBtnText));
+
+        arr.recycle();
+    }
+
+    private void parseStylingAttrs(AttributeSet attrs){
+        TypedArray arr = getContext().obtainStyledAttributes(attrs, R.styleable.RatingRequestStyling);
+
+        if (arr == null)
+            return;
+
+        setBackgroundColor(arr.getColor(R.styleable.RatingRequestStyling_rr_backgroundColor,
+                getContext().getResources().getColor(R.color.default_background)));
+        setTextColor(arr.getColor(R.styleable.RatingRequestStyling_rr_textColor,
+                getContext().getResources().getColor(R.color.default_text)));
 
         arr.recycle();
     }
@@ -143,6 +165,17 @@ public class RatingRequestDialogItem extends LinearLayout {;
         return declineButton.getText();
     }
     //endregion Text
+
+    //region Styling
+    public void setBackgroundColor(int color){
+        handler.setBackgroundColor(color);
+        acceptButton.setTextColor(color);
+    }
+
+    public void setTextColor(int color){
+        text.setTextColor(color);
+    }
+    //endregion Styling
 
     public boolean isShown(){
         return getVisibility() == VISIBLE;

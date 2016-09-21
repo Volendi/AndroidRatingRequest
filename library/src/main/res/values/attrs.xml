@@ -5,4 +5,8 @@
         <attr name="rr_declineBtnText" format="string"/>
         <attr name="rr_mainText" format="string"/>
     </declare-styleable>
+    <declare-styleable name="RatingRequestStyling">
+        <attr name="rr_backgroundColor" format="color"/>
+        <attr name="rr_textColor" format="color"/>
+    </declare-styleable>
 </resources>
