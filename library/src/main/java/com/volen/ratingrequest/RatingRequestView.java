@@ -85,7 +85,7 @@ public class RatingRequestView extends FrameLayout {
             @Override
             public void onDecline(RatingRequestDialogItem view) {
                 if (onRatingRequestResultListener != null)
-                    onRatingRequestResultListener.onFeedbackDeclined(getView());
+                    onRatingRequestResultListener.onRatingDeclined(getView());
             }
         });
 
