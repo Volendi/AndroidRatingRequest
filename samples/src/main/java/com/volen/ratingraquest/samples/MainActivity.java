@@ -14,8 +14,8 @@ public class MainActivity extends AppCompatActivity {
 
         RatingRequestView ratingRequest = (RatingRequestView)findViewById(R.id.rating_request);
 
-        ratingRequest.setNudgeViewText("Enjoying App?", "Yes", "Not really");
+        /*ratingRequest.setNudgeViewText("Enjoying App?", "Yes", "Not really");
         ratingRequest.setRatingViewText("How about a rating in the Google Play then?", "Yes, sure", "No, thanks");
-        ratingRequest.setFeedbackViewText("Would you mind giving us some feedback?", "Yes, sure", "No, thanks");
+        ratingRequest.setFeedbackViewText("Would you mind giving us some feedback?", "Yes, sure", "No, thanks");*/
     }
 }

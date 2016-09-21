@@ -1,6 +1,8 @@
 package com.volen.ratingrequest;
 
 import android.content.Context;
+import android.content.res.TypedArray;
+import android.graphics.drawable.Drawable;
 import android.media.Rating;
 import android.support.annotation.IntDef;
 import android.support.annotation.MainThread;
@@ -44,6 +46,7 @@ public class RatingRequestView extends FrameLayout {
         super(context, attrs);
 
         init();
+        parseAttrs(attrs);
     }
 
     //region Init
@@ -103,6 +106,43 @@ public class RatingRequestView extends FrameLayout {
             }
         });
     }
+
+    //region Attrs
+    private void parseAttrs(AttributeSet attrs){
+        if (attrs == null)
+            return;
+
+        parseTextAttrs(attrs);
+        parseStylingAttrs(attrs);
+    }
+
+    private void parseTextAttrs(AttributeSet attrs){
+        TypedArray arr = getContext().obtainStyledAttributes(attrs, R.styleable.RatingRequestViewText);
+
+        if (arr == null)
+            return;
+
+        setNudgeViewText(arr.getString(R.styleable.RatingRequestViewText_rr_nudgeMainText),
+                arr.getString(R.styleable.RatingRequestViewText_rr_nudgeAcceptBtnText),
+                arr.getString(R.styleable.RatingRequestViewText_rr_nudgeDeclineBtnText));
+
+        setRatingViewText(arr.getString(R.styleable.RatingRequestViewText_rr_ratingMainText),
+                arr.getString(R.styleable.RatingRequestViewText_rr_ratingAcceptBtnText),
+                arr.getString(R.styleable.RatingRequestViewText_rr_ratingDeclineBtnText));
+
+        setFeedbackViewText(arr.getString(R.styleable.RatingRequestViewText_rr_feedbackMainText),
+                arr.getString(R.styleable.RatingRequestViewText_rr_feedbackAcceptBtnText),
+                arr.getString(R.styleable.RatingRequestViewText_rr_feedbackDeclineBtnText));
+
+        arr.recycle();
+    }
+
+    private void parseStylingAttrs(AttributeSet attrs){
+        nudgeView.parseStylingAttrs(attrs);
+        ratingView.parseStylingAttrs(attrs);
+        feedbackView.parseStylingAttrs(attrs);
+    }
+    //endregion Attrs
     //endregion Init
 
     //region Text

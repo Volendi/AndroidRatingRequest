@@ -1,6 +1,14 @@
 package com.volen.ratingrequest;
 
 import android.content.Context;
+import android.content.res.TypedArray;
+import android.graphics.Color;
+import android.graphics.ColorFilter;
+import android.graphics.ImageFormat;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.GradientDrawable;
+import android.graphics.drawable.ShapeDrawable;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.View;
@@ -8,7 +16,10 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-public class RatingRequestDialogItem extends LinearLayout {;
+public class RatingRequestDialogItem extends LinearLayout {
+    public static final int NO_SUCH_COLOR = -1;
+
+    private View handler;
     private TextView text;
     private Button acceptButton;
     private Button declineButton;
@@ -28,6 +39,7 @@ public class RatingRequestDialogItem extends LinearLayout {;
         super(context, attrs);
 
         init();
+        parseAttrs(attrs);
     }
 
     //region Init
@@ -39,6 +51,7 @@ public class RatingRequestDialogItem extends LinearLayout {;
     }
 
     private void initUi(){
+        handler = findViewById(R.id.handler);
         text = (TextView) findViewById(R.id.text);
         acceptButton = (Button) findViewById(R.id.accept_btn);
         declineButton = (Button) findViewById(R.id.decline_btn);
@@ -61,6 +74,51 @@ public class RatingRequestDialogItem extends LinearLayout {;
             }
         });
     }
+
+    //region Attrs
+    private void parseAttrs(AttributeSet attrs){
+        if (attrs == null)
+            return;
+
+        parseTextAttrs(attrs);
+        parseStylingAttrs(attrs);
+    }
+
+    private void parseTextAttrs(AttributeSet attrs){
+        TypedArray arr = getContext().obtainStyledAttributes(attrs, R.styleable.RatingRequestDialogItemText);
+
+        if (arr == null)
+            return;
+
+        setText(arr.getString(R.styleable.RatingRequestDialogItemText_rr_mainText),
+                arr.getString(R.styleable.RatingRequestDialogItemText_rr_acceptBtnText),
+                arr.getString(R.styleable.RatingRequestDialogItemText_rr_declineBtnText));
+
+        arr.recycle();
+    }
+
+    public void parseStylingAttrs(AttributeSet attrs){
+        TypedArray arr = getContext().obtainStyledAttributes(attrs, R.styleable.RatingRequestStyling);
+
+        if (arr == null)
+            return;
+
+        setBackgroundColor(arr.getColor(R.styleable.RatingRequestStyling_rr_backgroundColor,
+                NO_SUCH_COLOR));
+        setTextColor(arr.getColor(R.styleable.RatingRequestStyling_rr_textColor,
+                NO_SUCH_COLOR));
+
+        setAcceptButtonBackgroundDrawable(arr.getDrawable(R.styleable.RatingRequestStyling_rr_acceptButtonBackground));
+        setAcceptButtonTextColor(arr.getColor(R.styleable.RatingRequestStyling_rr_acceptButtonTextColor,
+                NO_SUCH_COLOR));
+
+        setDeclineButtonBackgroundDrawable(arr.getDrawable(R.styleable.RatingRequestStyling_rr_declineButtonBackground));
+        setDeclineButtonTextColor(arr.getColor(R.styleable.RatingRequestStyling_rr_declineButtonTextColor,
+                NO_SUCH_COLOR));
+
+        arr.recycle();
+    }
+    //endregion Attrs
     //endregion Init
 
     //region Text
@@ -119,6 +177,47 @@ public class RatingRequestDialogItem extends LinearLayout {;
         return declineButton.getText();
     }
     //endregion Text
+
+    //region Styling
+    public void setBackgroundColor(int color){
+        if (color == NO_SUCH_COLOR)
+            return;
+
+        handler.setBackgroundColor(color);
+        acceptButton.setTextColor(color);
+    }
+
+    public void setTextColor(int color){
+        if (color == NO_SUCH_COLOR)
+            return;
+
+        text.setTextColor(color);
+    }
+
+    public void setAcceptButtonBackgroundDrawable(Drawable drawable){
+        if (drawable != null)
+            acceptButton.setBackgroundDrawable(drawable);
+    }
+
+    public void setAcceptButtonTextColor(int color){
+        if (color == NO_SUCH_COLOR)
+            return;
+
+        acceptButton.setTextColor(color);
+    }
+
+    public void setDeclineButtonBackgroundDrawable(Drawable drawable){
+        if (drawable != null)
+            declineButton.setBackgroundDrawable(drawable);
+    }
+
+    public void setDeclineButtonTextColor(int color){
+        if (color == NO_SUCH_COLOR)
+            return;
+
+        declineButton.setTextColor(color);
+    }
+    //endregion Styling
 
     public boolean isShown(){
         return getVisibility() == VISIBLE;

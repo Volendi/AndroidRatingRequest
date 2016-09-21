@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="RatingRequestDialogItemText">
+        <attr name="rr_acceptBtnText" format="string"/>
+        <attr name="rr_declineBtnText" format="string"/>
+        <attr name="rr_mainText" format="string"/>
+    </declare-styleable>
+    <declare-styleable name="RatingRequestStyling">
+        <attr name="rr_backgroundColor" format="color"/>
+        <attr name="rr_textColor" format="color"/>
+        <attr name="rr_acceptButtonBackground" format="integer"/>
+        <attr name="rr_acceptButtonTextColor" format="color"/>
+        <attr name="rr_declineButtonBackground" format="integer"/>
+        <attr name="rr_declineButtonTextColor" format="color"/>
+    </declare-styleable>
+    <declare-styleable name="RatingRequestViewText">
+        <attr name="rr_nudgeAcceptBtnText" format="string"/>
+        <attr name="rr_nudgeDeclineBtnText" format="string"/>
+        <attr name="rr_nudgeMainText" format="string"/>
+        <attr name="rr_ratingAcceptBtnText" format="string"/>
+        <attr name="rr_ratingDeclineBtnText" format="string"/>
+        <attr name="rr_ratingMainText" format="string"/>
+        <attr name="rr_feedbackAcceptBtnText" format="string"/>
+        <attr name="rr_feedbackDeclineBtnText" format="string"/>
+        <attr name="rr_feedbackMainText" format="string"/>
+    </declare-styleable>
+</resources>
