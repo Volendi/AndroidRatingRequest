@@ -116,25 +116,9 @@ public class RatingRequestView extends FrameLayout {
     }
 
     private void parseStylingAttrs(AttributeSet attrs){
-        TypedArray arr = getContext().obtainStyledAttributes(attrs, R.styleable.RatingRequestStyling);
-
-        if (arr == null)
-            return;
-
-        setBackgroundColor(arr.getColor(R.styleable.RatingRequestStyling_rr_backgroundColor,
-                getContext().getResources().getColor(R.color.default_background)));
-        setTextColor(arr.getColor(R.styleable.RatingRequestStyling_rr_textColor,
-                getContext().getResources().getColor(R.color.default_text)));
-
-        setAcceptButtonBackgroundDrawable(arr.getDrawable(R.styleable.RatingRequestStyling_rr_acceptButtonBackground));
-        setAcceptButtonTextColor(arr.getColor(R.styleable.RatingRequestStyling_rr_acceptButtonTextColor,
-                getContext().getResources().getColor(R.color.default_background)));
-
-        setDeclineButtonBackgroundDrawable(arr.getDrawable(R.styleable.RatingRequestStyling_rr_declineButtonBackground));
-        setDeclineButtonTextColor(arr.getColor(R.styleable.RatingRequestStyling_rr_declineButtonTextColor,
-                getContext().getResources().getColor(R.color.default_buttons)));
-
-        arr.recycle();
+        nudgeView.parseStylingAttrs(attrs);
+        ratingView.parseStylingAttrs(attrs);
+        feedbackView.parseStylingAttrs(attrs);
     }
     //endregion Attrs
     //endregion Init
@@ -155,44 +139,6 @@ public class RatingRequestView extends FrameLayout {
         feedbackView.setText(mainText, acceptButtonText, declineButtonText);
     }
     //endregion Text
-
-    //region Styling
-    public void setBackgroundColor(int color){
-        nudgeView.setBackgroundColor(color);
-        ratingView.setBackgroundColor(color);
-        feedbackView.setBackgroundColor(color);
-    }
-
-    public void setTextColor(int color){
-        nudgeView.setTextColor(color);
-        ratingView.setTextColor(color);
-        feedbackView.setTextColor(color);
-    }
-
-    public void setAcceptButtonBackgroundDrawable(Drawable drawable){
-        nudgeView.setAcceptButtonBackgroundDrawable(drawable);
-        ratingView.setAcceptButtonBackgroundDrawable(drawable);
-        feedbackView.setAcceptButtonBackgroundDrawable(drawable);
-    }
-
-    public void setAcceptButtonTextColor(int color){
-        nudgeView.setAcceptButtonTextColor(color);
-        ratingView.setAcceptButtonTextColor(color);
-        feedbackView.setAcceptButtonTextColor(color);
-    }
-
-    public void setDeclineButtonBackgroundDrawable(Drawable drawable){
-        nudgeView.setDeclineButtonBackgroundDrawable(drawable);
-        ratingView.setDeclineButtonBackgroundDrawable(drawable);
-        feedbackView.setDeclineButtonBackgroundDrawable(drawable);
-    }
-
-    public void setDeclineButtonTextColor(int color){
-        nudgeView.setDeclineButtonTextColor(color);
-        ratingView.setDeclineButtonTextColor(color);
-        feedbackView.setDeclineButtonTextColor(color);
-    }
-    //endregion Styling
 
     public int getState(){
         return state;
