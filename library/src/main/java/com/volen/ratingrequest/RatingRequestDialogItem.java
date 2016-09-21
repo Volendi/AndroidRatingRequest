@@ -2,6 +2,7 @@ package com.volen.ratingrequest;
 
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.graphics.Color;
 import android.graphics.ColorFilter;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
@@ -104,6 +105,14 @@ public class RatingRequestDialogItem extends LinearLayout {;
         setTextColor(arr.getColor(R.styleable.RatingRequestStyling_rr_textColor,
                 getContext().getResources().getColor(R.color.default_text)));
 
+        setAcceptButtonBackgroundDrawable(arr.getDrawable(R.styleable.RatingRequestStyling_rr_acceptButtonBackground));
+        setAcceptButtonTextColor(arr.getColor(R.styleable.RatingRequestStyling_rr_acceptButtonTextColor,
+                getContext().getResources().getColor(R.color.default_background)));
+
+        setDeclineButtonBackgroundDrawable(arr.getDrawable(R.styleable.RatingRequestStyling_rr_declineButtonBackground));
+        setDeclineButtonTextColor(arr.getColor(R.styleable.RatingRequestStyling_rr_declineButtonTextColor,
+                getContext().getResources().getColor(R.color.default_buttons)));
+
         arr.recycle();
     }
     //endregion Attrs
@@ -174,6 +183,24 @@ public class RatingRequestDialogItem extends LinearLayout {;
 
     public void setTextColor(int color){
         text.setTextColor(color);
+    }
+
+    public void setAcceptButtonBackgroundDrawable(Drawable drawable){
+        if (drawable != null)
+            acceptButton.setBackgroundDrawable(drawable);
+    }
+
+    public void setAcceptButtonTextColor(int color){
+        acceptButton.setTextColor(color);
+    }
+
+    public void setDeclineButtonBackgroundDrawable(Drawable drawable){
+        if (drawable != null)
+            declineButton.setBackgroundDrawable(drawable);
+    }
+
+    public void setDeclineButtonTextColor(int color){
+        declineButton.setTextColor(color);
     }
     //endregion Styling
 

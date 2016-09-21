@@ -8,5 +8,9 @@
     <declare-styleable name="RatingRequestStyling">
         <attr name="rr_backgroundColor" format="color"/>
         <attr name="rr_textColor" format="color"/>
+        <attr name="rr_acceptButtonBackground" format="integer"/>
+        <attr name="rr_acceptButtonTextColor" format="color"/>
+        <attr name="rr_declineButtonBackground" format="integer"/>
+        <attr name="rr_declineButtonTextColor" format="color"/>
     </declare-styleable>
 </resources>
