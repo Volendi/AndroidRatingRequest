@@ -10,6 +10,7 @@ import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.FrameLayout;
 
 import java.lang.annotation.Retention;
@@ -22,6 +23,8 @@ public class RatingRequestView extends FrameLayout {
 
     private Animation showAnimation;
     private Animation hideAnimation;
+
+    private final int UNSUPPORTED_RESOURCE = -1;
 
     @IntDef({ NUDGE, FEEDBACK, RATING })
     @Retention(RetentionPolicy.SOURCE)
@@ -118,6 +121,7 @@ public class RatingRequestView extends FrameLayout {
 
         parseTextAttrs(attrs);
         parseStylingAttrs(attrs);
+        parseAnimationAttrs(attrs);
     }
 
     private void parseTextAttrs(AttributeSet attrs){
@@ -145,6 +149,25 @@ public class RatingRequestView extends FrameLayout {
         nudgeView.parseStylingAttrs(attrs);
         ratingView.parseStylingAttrs(attrs);
         feedbackView.parseStylingAttrs(attrs);
+    }
+
+    private void parseAnimationAttrs(AttributeSet attrs){
+        TypedArray arr = getContext().obtainStyledAttributes(attrs, R.styleable.RatingRequestAnimation);
+
+        if (arr == null)
+            return;
+
+        showAnimation = loadAnimation(arr, R.styleable.RatingRequestAnimation_rr_showAnimation);
+        hideAnimation = loadAnimation(arr, R.styleable.RatingRequestAnimation_rr_hideAnimation);
+
+        arr.recycle();
+    }
+
+    private Animation loadAnimation(TypedArray arr, int styleableId){
+        int resourceId = arr.getResourceId(styleableId, UNSUPPORTED_RESOURCE);
+        return resourceId != UNSUPPORTED_RESOURCE ?
+                AnimationUtils.loadAnimation(getContext(), resourceId) :
+                null;
     }
     //endregion Attrs
     //endregion Init

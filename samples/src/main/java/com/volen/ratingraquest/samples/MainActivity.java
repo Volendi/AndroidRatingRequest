@@ -18,13 +18,13 @@ public class MainActivity extends AppCompatActivity {
 
         final RatingRequestView ratingRequest = (RatingRequestView)findViewById(R.id.rating_request);
 
-        Animation anim = new AlphaAnimation(0.0f, 1.0f);
+        /*Animation anim = new AlphaAnimation(0.0f, 1.0f);
         anim.setDuration(500);
         ratingRequest.setShowAnimation(anim);
 
         anim = new AlphaAnimation(1.0f, 0.0f);
         anim.setDuration(500);
-        ratingRequest.setHideAnimation(anim);
+        ratingRequest.setHideAnimation(anim);*/
 
         ratingRequest.setOnClickListener(new View.OnClickListener() {
             @Override
