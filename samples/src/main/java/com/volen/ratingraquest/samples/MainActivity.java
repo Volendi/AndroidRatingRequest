@@ -2,6 +2,10 @@ package com.volen.ratingraquest.samples;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.view.menu.ActionMenuItemView;
+import android.view.View;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
 
 import com.volen.ratingrequest.RatingRequestView;
 
@@ -12,7 +16,29 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        RatingRequestView ratingRequest = (RatingRequestView)findViewById(R.id.rating_request);
+        final RatingRequestView ratingRequest = (RatingRequestView)findViewById(R.id.rating_request);
+
+        Animation anim = new AlphaAnimation(0.0f, 1.0f);
+        anim.setDuration(500);
+        ratingRequest.setShowAnimation(anim);
+
+        anim = new AlphaAnimation(1.0f, 0.0f);
+        anim.setDuration(500);
+        ratingRequest.setHideAnimation(anim);
+
+        ratingRequest.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ratingRequest.hideAnimate();
+            }
+        });
+
+        findViewById(R.id.root).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ratingRequest.showAnimate();
+            }
+        });
 
         /*ratingRequest.setNudgeViewText("Enjoying App?", "Yes", "Not really");
         ratingRequest.setRatingViewText("How about a rating in the Google Play then?", "Yes, sure", "No, thanks");

@@ -9,6 +9,7 @@ import android.support.annotation.MainThread;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.View;
+import android.view.animation.Animation;
 import android.widget.FrameLayout;
 
 import java.lang.annotation.Retention;
@@ -18,6 +19,9 @@ public class RatingRequestView extends FrameLayout {
     private RatingRequestDialogItem nudgeView;
     private RatingRequestDialogItem ratingView;
     private RatingRequestDialogItem feedbackView;
+
+    private Animation showAnimation;
+    private Animation hideAnimation;
 
     @IntDef({ NUDGE, FEEDBACK, RATING })
     @Retention(RetentionPolicy.SOURCE)
@@ -191,6 +195,40 @@ public class RatingRequestView extends FrameLayout {
 
     public void setOnRatingRequestResult(OnRatingRequestResultListener listener){
         onRatingRequestResultListener = listener;
+    }
+
+    //region Animation
+    public void setShowAnimation(Animation animation){
+        showAnimation = animation;
+    }
+
+    public void setHideAnimation(Animation animation){
+        hideAnimation = animation;
+    }
+
+    private void playShowAnimation() {
+        hideAnimation.cancel();
+        startAnimation(showAnimation);
+    }
+
+    private void playHideAnimation() {
+        showAnimation.cancel();
+        startAnimation(hideAnimation);
+    }
+    //endregion Animation
+
+    public void showAnimate(){
+        if (!isShown()){
+            playShowAnimation();
+            show();
+        }
+    }
+
+    public void hideAnimate(){
+        if (isShown()){
+            playHideAnimation();
+            hide();
+        }
     }
 
     public void show(){
