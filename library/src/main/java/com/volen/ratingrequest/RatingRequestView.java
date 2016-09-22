@@ -217,6 +217,7 @@ public class RatingRequestView extends FrameLayout {
     }
     //endregion Animation
 
+    //region Visibility
     public void showAnimate(){
         if (!isShown()){
             playShowAnimation();
@@ -231,6 +232,14 @@ public class RatingRequestView extends FrameLayout {
         }
     }
 
+    public void toggleAnimate(){
+        if (isShown()){
+            hideAnimate();
+        } else {
+            showAnimate();
+        }
+    }
+
     public void show(){
         setVisibility(VISIBLE);
     }
@@ -239,9 +248,18 @@ public class RatingRequestView extends FrameLayout {
         setVisibility(GONE);
     }
 
+    public void toggle(){
+        if (isShown()){
+            hide();
+        } else {
+            show();
+        }
+    }
+
     public boolean isShown(){
         return getVisibility() == VISIBLE;
     }
+    //endregion Visibility
 
     protected RatingRequestView getView(){
         return this;

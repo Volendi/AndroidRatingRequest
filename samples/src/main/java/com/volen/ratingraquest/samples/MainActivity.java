@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.root).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ratingRequest.showAnimate();
+                ratingRequest.toggleAnimate();
             }
         });
 
