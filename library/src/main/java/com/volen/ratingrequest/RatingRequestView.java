@@ -24,7 +24,12 @@ public class RatingRequestView extends FrameLayout {
     private Animation showAnimation;
     private Animation hideAnimation;
 
-    private final int UNSUPPORTED_RESOURCE = -1;
+    //region DefaultResourcesIds
+    protected final int UNSUPPORTED_RESOURCE = -1;
+
+    protected final int DEFAULT_SHOW_ANIM_RES_ID = R.anim.rr_default_show_anim;
+    protected final int DEFAULT_HIDE_ANIM_RES_ID = R.anim.rr_default_hide_anim;
+    //endregion DefaultResourcesIds
 
     @IntDef({ NUDGE, FEEDBACK, RATING })
     @Retention(RetentionPolicy.SOURCE)
@@ -64,6 +69,7 @@ public class RatingRequestView extends FrameLayout {
 
         initUi();
         initActions();
+        initDefaultAnimations();
     }
 
     private void initUi(){
@@ -114,6 +120,11 @@ public class RatingRequestView extends FrameLayout {
         });
     }
 
+    private void initDefaultAnimations(){
+        showAnimation = AnimationUtils.loadAnimation(getContext(), DEFAULT_SHOW_ANIM_RES_ID);
+        hideAnimation = AnimationUtils.loadAnimation(getContext(), DEFAULT_HIDE_ANIM_RES_ID);
+    }
+
     //region Attrs
     private void parseAttrs(AttributeSet attrs){
         if (attrs == null)
@@ -157,17 +168,17 @@ public class RatingRequestView extends FrameLayout {
         if (arr == null)
             return;
 
-        showAnimation = loadAnimation(arr, R.styleable.RatingRequestAnimation_rr_showAnimation);
-        hideAnimation = loadAnimation(arr, R.styleable.RatingRequestAnimation_rr_hideAnimation);
+        showAnimation = loadAnimation(arr, R.styleable.RatingRequestAnimation_rr_showAnimation,
+                DEFAULT_SHOW_ANIM_RES_ID);
+        hideAnimation = loadAnimation(arr, R.styleable.RatingRequestAnimation_rr_hideAnimation,
+                DEFAULT_HIDE_ANIM_RES_ID);
 
         arr.recycle();
     }
 
-    private Animation loadAnimation(TypedArray arr, int styleableId){
-        int resourceId = arr.getResourceId(styleableId, UNSUPPORTED_RESOURCE);
-        return resourceId != UNSUPPORTED_RESOURCE ?
-                AnimationUtils.loadAnimation(getContext(), resourceId) :
-                null;
+    private Animation loadAnimation(TypedArray arr, int styleableId, int defaultAnimResId){
+        int resourceId = arr.getResourceId(styleableId, defaultAnimResId);
+        return AnimationUtils.loadAnimation(getContext(), resourceId);
     }
     //endregion Attrs
     //endregion Init
