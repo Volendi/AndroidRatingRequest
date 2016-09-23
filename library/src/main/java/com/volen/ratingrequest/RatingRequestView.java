@@ -82,12 +82,12 @@ public class RatingRequestView extends FrameLayout {
         nudgeView.setOnDecisionListener(new RatingRequestDialogItem.OnDecisionListener() {
             @Override
             public void onAccept(RatingRequestDialogItem view) {
-                setState(RATING);
+                switchStateAnimate(RATING);
             }
 
             @Override
             public void onDecline(RatingRequestDialogItem view) {
-                setState(FEEDBACK);
+                switchStateAnimate(FEEDBACK);
             }
         });
 
@@ -204,7 +204,7 @@ public class RatingRequestView extends FrameLayout {
         return state;
     }
 
-    public void setState(@State int state){
+    public void switchState(@State int state){
         if (this.state == state)
             return;
 
@@ -227,6 +227,29 @@ public class RatingRequestView extends FrameLayout {
         this.state = state;
     }
 
+    public void switchStateAnimate(@State int state){
+        if (this.state == state)
+            return;
+
+        nudgeView.hideAnimate();
+        feedbackView.hideAnimate();
+        ratingView.hideAnimate();
+
+        switch (state){
+            case NUDGE:
+                nudgeView.showAnimate();
+                break;
+            case FEEDBACK:
+                feedbackView.showAnimate();
+                break;
+            case RATING:
+                ratingView.showAnimate();
+                break;
+        }
+
+        this.state = state;
+    }
+
     public void setOnRatingRequestResult(OnRatingRequestResultListener listener){
         onRatingRequestResultListener = listener;
     }
@@ -238,6 +261,18 @@ public class RatingRequestView extends FrameLayout {
 
     public void setHideAnimation(Animation animation){
         hideAnimation = animation;
+    }
+
+    public void setSwitchStateOutAnim(Animation animation){
+        nudgeView.setHideAnimation(animation);
+        ratingView.setHideAnimation(animation);
+        feedbackView.setHideAnimation(animation);
+    }
+
+    public void setSwitchStateInAnim(Animation animation){
+        nudgeView.setShowAnimation(animation);
+        ratingView.setShowAnimation(animation);
+        feedbackView.setShowAnimation(animation);
     }
 
     private void playShowAnimation() {

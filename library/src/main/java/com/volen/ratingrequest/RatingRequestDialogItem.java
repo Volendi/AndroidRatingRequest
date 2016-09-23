@@ -12,6 +12,8 @@ import android.graphics.drawable.ShapeDrawable;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -23,6 +25,14 @@ public class RatingRequestDialogItem extends LinearLayout {
     private TextView text;
     private Button acceptButton;
     private Button declineButton;
+
+    private Animation showAnimation;
+    private Animation hideAnimation;
+
+    //region DefaultResourcesIds
+    protected final int DEFAULT_SHOW_ANIM_RES_ID = R.anim.rr_default_show_anim;
+    protected final int DEFAULT_HIDE_ANIM_RES_ID = R.anim.rr_default_hide_anim;
+    //endregion DefaultResourcesIds
 
     private OnDecisionListener onDecisionListener;
 
@@ -48,6 +58,7 @@ public class RatingRequestDialogItem extends LinearLayout {
 
         initUi();
         initActions();
+        initDefaultAnimations();
     }
 
     private void initUi(){
@@ -73,6 +84,11 @@ public class RatingRequestDialogItem extends LinearLayout {
                     onDecisionListener.onDecline(getView());
             }
         });
+    }
+
+    private void initDefaultAnimations(){
+        showAnimation = AnimationUtils.loadAnimation(getContext(), DEFAULT_SHOW_ANIM_RES_ID);
+        hideAnimation = AnimationUtils.loadAnimation(getContext(), DEFAULT_HIDE_ANIM_RES_ID);
     }
 
     //region Attrs
@@ -219,6 +235,27 @@ public class RatingRequestDialogItem extends LinearLayout {
     }
     //endregion Styling
 
+    //region Animation
+    public void setShowAnimation(Animation animation){
+        showAnimation = animation;
+    }
+
+    public void setHideAnimation(Animation animation){
+        hideAnimation = animation;
+    }
+
+    private void playShowAnimation() {
+        hideAnimation.cancel();
+        startAnimation(showAnimation);
+    }
+
+    private void playHideAnimation() {
+        showAnimation.cancel();
+        startAnimation(hideAnimation);
+    }
+    //endregion Animation
+
+    //region Visibility
     public boolean isShown(){
         return getVisibility() == VISIBLE;
     }
@@ -230,6 +267,37 @@ public class RatingRequestDialogItem extends LinearLayout {
     public void hide(){
         setVisibility(GONE);
     }
+
+    public void toggle(){
+        if (isShown()){
+            hide();
+        } else {
+            show();
+        }
+    }
+
+    public void showAnimate(){
+        if (!isShown()){
+            playShowAnimation();
+            show();
+        }
+    }
+
+    public void hideAnimate(){
+        if (isShown()){
+            playHideAnimation();
+            hide();
+        }
+    }
+
+    public void toggleAnimate(){
+        if (isShown()){
+            hide();
+        } else {
+            show();
+        }
+    }
+    //endregion Visibility
 
     public void setOnDecisionListener(OnDecisionListener onDecisionListener){
         this.onDecisionListener = onDecisionListener;
