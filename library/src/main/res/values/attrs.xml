@@ -29,5 +29,6 @@
         <attr name="rr_hideAnimation" format="reference"/>
         <attr name="rr_switchStateInAnim" format="reference"/>
         <attr name="rr_switchStateOutAnim" format="reference"/>
+        <attr name="rr_switchStateAnimationDelay" format="integer"/>
     </declare-styleable>
 </resources>

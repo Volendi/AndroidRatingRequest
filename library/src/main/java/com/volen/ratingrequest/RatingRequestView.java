@@ -27,6 +27,8 @@ public class RatingRequestView extends FrameLayout {
     private Animation switchStateInAnimation;
     private Animation switchStateOutAnimation;
 
+    private int switchStateAnimationDelay;
+
     //region DefaultResourcesIds
     protected final int UNSUPPORTED_RESOURCE = -1;
 
@@ -126,6 +128,8 @@ public class RatingRequestView extends FrameLayout {
     private void initDefaultAnimations(){
         showAnimation = AnimationUtils.loadAnimation(getContext(), DEFAULT_SHOW_ANIM_RES_ID);
         hideAnimation = AnimationUtils.loadAnimation(getContext(), DEFAULT_HIDE_ANIM_RES_ID);
+
+        switchStateAnimationDelay = getContext().getResources().getInteger(R.integer.default_switch_state_anim_delay);
     }
 
     //region Attrs
@@ -180,6 +184,9 @@ public class RatingRequestView extends FrameLayout {
                 DEFAULT_HIDE_ANIM_RES_ID));
         setSwitchStateInAnim(loadAnimation(arr, R.styleable.RatingRequestAnimation_rr_switchStateInAnim,
                 DEFAULT_SHOW_ANIM_RES_ID));
+
+        switchStateAnimationDelay = arr.getInt(R.styleable.RatingRequestAnimation_rr_switchStateAnimationDelay,
+                switchStateAnimationDelay);
 
         arr.recycle();
     }
@@ -295,7 +302,7 @@ public class RatingRequestView extends FrameLayout {
             public void run() {
                 playSwitchStateInAnimation(newState);
             }
-        }, switchStateOutAnimation.getDuration() / 2);
+        }, switchStateAnimationDelay);
     }
 
     private void playSwitchStateInAnimation(@State int newState){
