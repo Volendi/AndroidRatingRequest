@@ -166,23 +166,23 @@ public class RatingRequestView extends FrameLayout {
     }
 
     private void parseStylingAttrs(AttributeSet attrs){
-        parseBackgroundColor(attrs);
-
-        nudgeView.parseStylingAttrs(attrs);
-        ratingView.parseStylingAttrs(attrs);
-        feedbackView.parseStylingAttrs(attrs);
-    }
-
-    private void parseBackgroundColor(AttributeSet attrs){
         TypedArray arr = getContext().obtainStyledAttributes(attrs, R.styleable.RatingRequestStyling);
 
         if (arr == null)
             return;
 
-        int color = arr.getColor(R.styleable.RatingRequestStyling_rr_backgroundColor, UNSUPPORTED_RESOURCE);
+        setBackgroundColor(arr.getColor(R.styleable.RatingRequestStyling_rr_backgroundColor,
+                UNSUPPORTED_RESOURCE));
+        setTextColor(arr.getColor(R.styleable.RatingRequestStyling_rr_textColor,
+                UNSUPPORTED_RESOURCE));
 
-        if (color != UNSUPPORTED_RESOURCE)
-            handler.setBackgroundColor(color);
+        setAcceptButtonBackgroundDrawable(arr.getDrawable(R.styleable.RatingRequestStyling_rr_acceptButtonBackground));
+        setAcceptButtonTextColor(arr.getColor(R.styleable.RatingRequestStyling_rr_acceptButtonTextColor,
+                UNSUPPORTED_RESOURCE));
+
+        setDeclineButtonBackgroundDrawable(arr.getDrawable(R.styleable.RatingRequestStyling_rr_declineButtonBackground));
+        setDeclineButtonTextColor(arr.getColor(R.styleable.RatingRequestStyling_rr_declineButtonTextColor,
+                UNSUPPORTED_RESOURCE));
 
         arr.recycle();
     }
@@ -233,6 +233,59 @@ public class RatingRequestView extends FrameLayout {
     }
     //endregion Text
 
+    //region Styling
+    public void setBackgroundColor(int color){
+        if (color == UNSUPPORTED_RESOURCE)
+            return;
+
+        handler.setBackgroundColor(color);
+
+        nudgeView.setBackgroundColor(color);
+        feedbackView.setBackgroundColor(color);
+        ratingView.setBackgroundColor(color);
+    }
+
+    public void setTextColor(int color){
+        if (color == UNSUPPORTED_RESOURCE)
+            return;
+
+        nudgeView.setTextColor(color);
+        ratingView.setTextColor(color);
+        feedbackView.setTextColor(color);
+    }
+
+    public void setAcceptButtonBackgroundDrawable(Drawable drawable){
+        nudgeView.setAcceptButtonBackgroundDrawable(drawable);
+        ratingView.setAcceptButtonBackgroundDrawable(drawable);
+        feedbackView.setAcceptButtonBackgroundDrawable(drawable);
+    }
+
+    public void setAcceptButtonTextColor(int color){
+        if (color == UNSUPPORTED_RESOURCE)
+            return;
+
+        nudgeView.setAcceptButtonTextColor(color);
+        ratingView.setAcceptButtonTextColor(color);
+        feedbackView.setAcceptButtonTextColor(color);
+    }
+
+    public void setDeclineButtonBackgroundDrawable(Drawable drawable){
+        nudgeView.setDeclineButtonBackgroundDrawable(drawable);
+        ratingView.setDeclineButtonBackgroundDrawable(drawable);
+        feedbackView.setDeclineButtonBackgroundDrawable(drawable);
+    }
+
+    public void setDeclineButtonTextColor(int color){
+        if (color == UNSUPPORTED_RESOURCE)
+            return;
+
+        nudgeView.setDeclineButtonTextColor(color);
+        ratingView.setDeclineButtonTextColor(color);
+        feedbackView.setDeclineButtonTextColor(color);
+    }
+    //endregion Styling
+
+    //region State
     public int getState(){
         return state;
     }
@@ -272,6 +325,7 @@ public class RatingRequestView extends FrameLayout {
     public void setOnRatingRequestResult(OnRatingRequestResultListener listener){
         onRatingRequestResultListener = listener;
     }
+    //endregion State
 
     //region Animation
     public void setShowAnimation(Animation animation){

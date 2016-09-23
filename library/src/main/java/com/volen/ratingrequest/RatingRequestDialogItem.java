@@ -113,7 +113,7 @@ public class RatingRequestDialogItem extends LinearLayout {
         arr.recycle();
     }
 
-    public void parseStylingAttrs(AttributeSet attrs){
+    private void parseStylingAttrs(AttributeSet attrs){
         TypedArray arr = getContext().obtainStyledAttributes(attrs, R.styleable.RatingRequestStyling);
 
         if (arr == null)
