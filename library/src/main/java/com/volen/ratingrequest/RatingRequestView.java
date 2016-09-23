@@ -285,6 +285,7 @@ public class RatingRequestView extends FrameLayout {
     }
     //endregion Styling
 
+    //region State
     public int getState(){
         return state;
     }
@@ -324,6 +325,7 @@ public class RatingRequestView extends FrameLayout {
     public void setOnRatingRequestResult(OnRatingRequestResultListener listener){
         onRatingRequestResultListener = listener;
     }
+    //endregion State
 
     //region Animation
     public void setShowAnimation(Animation animation){
