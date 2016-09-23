@@ -18,6 +18,7 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
 public class RatingRequestView extends FrameLayout {
+    private View handler;
     private RatingRequestDialogItem nudgeView;
     private RatingRequestDialogItem ratingView;
     private RatingRequestDialogItem feedbackView;
@@ -78,6 +79,7 @@ public class RatingRequestView extends FrameLayout {
     }
 
     private void initUi(){
+        handler = findViewById(R.id.handler);
         nudgeView = (RatingRequestDialogItem)findViewById(R.id.nudge);
         ratingView = (RatingRequestDialogItem)findViewById(R.id.rating);
         feedbackView = (RatingRequestDialogItem)findViewById(R.id.feedback);
@@ -164,9 +166,25 @@ public class RatingRequestView extends FrameLayout {
     }
 
     private void parseStylingAttrs(AttributeSet attrs){
+        parseBackgroundColor(attrs);
+
         nudgeView.parseStylingAttrs(attrs);
         ratingView.parseStylingAttrs(attrs);
         feedbackView.parseStylingAttrs(attrs);
+    }
+
+    private void parseBackgroundColor(AttributeSet attrs){
+        TypedArray arr = getContext().obtainStyledAttributes(attrs, R.styleable.RatingRequestStyling);
+
+        if (arr == null)
+            return;
+
+        int color = arr.getColor(R.styleable.RatingRequestStyling_rr_backgroundColor, UNSUPPORTED_RESOURCE);
+
+        if (color != UNSUPPORTED_RESOURCE)
+            handler.setBackgroundColor(color);
+
+        arr.recycle();
     }
 
     private void parseAnimationAttrs(AttributeSet attrs){
@@ -218,8 +236,6 @@ public class RatingRequestView extends FrameLayout {
     public int getState(){
         return state;
     }
-
-
 
     public void switchState(@State int state){
         if (this.state == state)

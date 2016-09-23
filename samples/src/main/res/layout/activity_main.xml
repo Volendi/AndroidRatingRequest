@@ -23,7 +23,6 @@
         app:rr_feedbackAcceptBtnText="Yes, sure"
         app:rr_feedbackDeclineBtnText="No, thanks"
         app:rr_showAnimation="@anim/show_from_bottom"
-        android:background="@color/colorPrimary"
         android:layout_alignParentBottom="true"/>
     
 </RelativeLayout>
