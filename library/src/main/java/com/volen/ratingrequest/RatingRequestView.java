@@ -166,17 +166,23 @@ public class RatingRequestView extends FrameLayout {
     }
 
     private void parseStylingAttrs(AttributeSet attrs){
-        parseBackgroundColor(attrs);
-
-        nudgeView.parseStylingAttrs(attrs);
-        ratingView.parseStylingAttrs(attrs);
-        feedbackView.parseStylingAttrs(attrs);
-    }
-
-    private void parseBackgroundColor(AttributeSet attrs){
         TypedArray arr = getContext().obtainStyledAttributes(attrs, R.styleable.RatingRequestStyling);
 
-        setBackgroundColor(arr.getColor(R.styleable.RatingRequestStyling_rr_backgroundColor, UNSUPPORTED_RESOURCE));
+        if (arr == null)
+            return;
+
+        setBackgroundColor(arr.getColor(R.styleable.RatingRequestStyling_rr_backgroundColor,
+                UNSUPPORTED_RESOURCE));
+        setTextColor(arr.getColor(R.styleable.RatingRequestStyling_rr_textColor,
+                UNSUPPORTED_RESOURCE));
+
+        setAcceptButtonBackgroundDrawable(arr.getDrawable(R.styleable.RatingRequestStyling_rr_acceptButtonBackground));
+        setAcceptButtonTextColor(arr.getColor(R.styleable.RatingRequestStyling_rr_acceptButtonTextColor,
+                UNSUPPORTED_RESOURCE));
+
+        setDeclineButtonBackgroundDrawable(arr.getDrawable(R.styleable.RatingRequestStyling_rr_declineButtonBackground));
+        setDeclineButtonTextColor(arr.getColor(R.styleable.RatingRequestStyling_rr_declineButtonTextColor,
+                UNSUPPORTED_RESOURCE));
 
         arr.recycle();
     }
@@ -240,6 +246,9 @@ public class RatingRequestView extends FrameLayout {
     }
 
     public void setTextColor(int color){
+        if (color == UNSUPPORTED_RESOURCE)
+            return;
+
         nudgeView.setTextColor(color);
         ratingView.setTextColor(color);
         feedbackView.setTextColor(color);
@@ -252,6 +261,9 @@ public class RatingRequestView extends FrameLayout {
     }
 
     public void setAcceptButtonTextColor(int color){
+        if (color == UNSUPPORTED_RESOURCE)
+            return;
+
         nudgeView.setAcceptButtonTextColor(color);
         ratingView.setAcceptButtonTextColor(color);
         feedbackView.setAcceptButtonTextColor(color);
@@ -264,6 +276,9 @@ public class RatingRequestView extends FrameLayout {
     }
 
     public void setDeclineButtonTextColor(int color){
+        if (color == UNSUPPORTED_RESOURCE)
+            return;
+
         nudgeView.setDeclineButtonTextColor(color);
         ratingView.setDeclineButtonTextColor(color);
         feedbackView.setDeclineButtonTextColor(color);
