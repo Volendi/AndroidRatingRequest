@@ -27,5 +27,7 @@
     <declare-styleable name="RatingRequestAnimation">
         <attr name="rr_showAnimation" format="reference"/>
         <attr name="rr_hideAnimation" format="reference"/>
+        <attr name="rr_switchStateInAnim" format="reference"/>
+        <attr name="rr_switchStateOutAnim" format="reference"/>
     </declare-styleable>
 </resources>

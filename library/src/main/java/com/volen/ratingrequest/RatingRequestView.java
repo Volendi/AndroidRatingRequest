@@ -173,6 +173,11 @@ public class RatingRequestView extends FrameLayout {
         hideAnimation = loadAnimation(arr, R.styleable.RatingRequestAnimation_rr_hideAnimation,
                 DEFAULT_HIDE_ANIM_RES_ID);
 
+        setSwitchStateOutAnim(loadAnimation(arr, R.styleable.RatingRequestAnimation_rr_switchStateOutAnim,
+                DEFAULT_SHOW_ANIM_RES_ID));
+        setSwitchStateInAnim(loadAnimation(arr, R.styleable.RatingRequestAnimation_rr_switchStateInAnim,
+                DEFAULT_SHOW_ANIM_RES_ID));
+
         arr.recycle();
     }
 
