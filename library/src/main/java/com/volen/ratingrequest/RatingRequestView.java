@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
 import android.media.Rating;
+import android.os.Handler;
 import android.support.annotation.IntDef;
 import android.support.annotation.MainThread;
 import android.support.annotation.Nullable;
@@ -23,6 +24,8 @@ public class RatingRequestView extends FrameLayout {
 
     private Animation showAnimation;
     private Animation hideAnimation;
+    private Animation switchStateInAnimation;
+    private Animation switchStateOutAnimation;
 
     //region DefaultResourcesIds
     protected final int UNSUPPORTED_RESOURCE = -1;
@@ -174,7 +177,7 @@ public class RatingRequestView extends FrameLayout {
                 DEFAULT_HIDE_ANIM_RES_ID);
 
         setSwitchStateOutAnim(loadAnimation(arr, R.styleable.RatingRequestAnimation_rr_switchStateOutAnim,
-                DEFAULT_SHOW_ANIM_RES_ID));
+                DEFAULT_HIDE_ANIM_RES_ID));
         setSwitchStateInAnim(loadAnimation(arr, R.styleable.RatingRequestAnimation_rr_switchStateInAnim,
                 DEFAULT_SHOW_ANIM_RES_ID));
 
@@ -209,6 +212,8 @@ public class RatingRequestView extends FrameLayout {
         return state;
     }
 
+
+
     public void switchState(@State int state){
         if (this.state == state)
             return;
@@ -236,21 +241,7 @@ public class RatingRequestView extends FrameLayout {
         if (this.state == state)
             return;
 
-        nudgeView.hideAnimate();
-        feedbackView.hideAnimate();
-        ratingView.hideAnimate();
-
-        switch (state){
-            case NUDGE:
-                nudgeView.showAnimate();
-                break;
-            case FEEDBACK:
-                feedbackView.showAnimate();
-                break;
-            case RATING:
-                ratingView.showAnimate();
-                break;
-        }
+        playSwitchStateOutAnimation(state);
 
         this.state = state;
     }
@@ -269,12 +260,16 @@ public class RatingRequestView extends FrameLayout {
     }
 
     public void setSwitchStateOutAnim(Animation animation){
+        switchStateOutAnimation = animation;
+
         nudgeView.setHideAnimation(animation);
         ratingView.setHideAnimation(animation);
         feedbackView.setHideAnimation(animation);
     }
 
     public void setSwitchStateInAnim(Animation animation){
+        switchStateInAnimation = animation;
+
         nudgeView.setShowAnimation(animation);
         ratingView.setShowAnimation(animation);
         feedbackView.setShowAnimation(animation);
@@ -288,6 +283,33 @@ public class RatingRequestView extends FrameLayout {
     private void playHideAnimation() {
         showAnimation.cancel();
         startAnimation(hideAnimation);
+    }
+
+    private void playSwitchStateOutAnimation(@State final int newState){
+        nudgeView.hideAnimate();
+        feedbackView.hideAnimate();
+        ratingView.hideAnimate();
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                playSwitchStateInAnimation(newState);
+            }
+        }, switchStateOutAnimation.getDuration() / 2);
+    }
+
+    private void playSwitchStateInAnimation(@State int newState){
+        switch (newState){
+            case NUDGE:
+                nudgeView.showAnimate();
+                break;
+            case FEEDBACK:
+                feedbackView.showAnimate();
+                break;
+            case RATING:
+                ratingView.showAnimate();
+                break;
+        }
     }
     //endregion Animation
 

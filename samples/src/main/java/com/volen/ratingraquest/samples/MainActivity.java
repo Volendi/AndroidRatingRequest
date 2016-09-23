@@ -6,6 +6,7 @@ import android.support.v7.view.menu.ActionMenuItemView;
 import android.view.View;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 
 import com.volen.ratingrequest.RatingRequestView;
 
@@ -29,6 +30,31 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 ratingRequest.toggleAnimate();
+            }
+        });
+
+        //ratingRequest.setSwitchStateOutAnim(AnimationUtils.makeOutAnimation(this, true));
+        //ratingRequest.setSwitchStateInAnim(AnimationUtils.makeInAnimation(this, true));
+
+        ratingRequest.setOnRatingRequestResult(new RatingRequestView.OnRatingRequestResultListener() {
+            @Override
+            public void onRating(RatingRequestView view) {
+                ratingRequest.switchStateAnimate(RatingRequestView.NUDGE);
+            }
+
+            @Override
+            public void onRatingDeclined(RatingRequestView view) {
+                ratingRequest.switchStateAnimate(RatingRequestView.NUDGE);
+            }
+
+            @Override
+            public void onFeedback(RatingRequestView view) {
+                ratingRequest.switchStateAnimate(RatingRequestView.NUDGE);
+            }
+
+            @Override
+            public void onFeedbackDeclined(RatingRequestView view) {
+                ratingRequest.switchStateAnimate(RatingRequestView.NUDGE);
             }
         });
 

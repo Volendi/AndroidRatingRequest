@@ -245,12 +245,10 @@ public class RatingRequestDialogItem extends LinearLayout {
     }
 
     private void playShowAnimation() {
-        hideAnimation.cancel();
         startAnimation(showAnimation);
     }
 
     private void playHideAnimation() {
-        showAnimation.cancel();
         startAnimation(hideAnimation);
     }
     //endregion Animation
@@ -265,7 +263,7 @@ public class RatingRequestDialogItem extends LinearLayout {
     }
 
     public void hide(){
-        setVisibility(GONE);
+        setVisibility(INVISIBLE);
     }
 
     public void toggle(){
