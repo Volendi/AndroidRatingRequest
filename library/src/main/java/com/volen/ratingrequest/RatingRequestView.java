@@ -176,13 +176,7 @@ public class RatingRequestView extends FrameLayout {
     private void parseBackgroundColor(AttributeSet attrs){
         TypedArray arr = getContext().obtainStyledAttributes(attrs, R.styleable.RatingRequestStyling);
 
-        if (arr == null)
-            return;
-
-        int color = arr.getColor(R.styleable.RatingRequestStyling_rr_backgroundColor, UNSUPPORTED_RESOURCE);
-
-        if (color != UNSUPPORTED_RESOURCE)
-            handler.setBackgroundColor(color);
+        setBackgroundColor(arr.getColor(R.styleable.RatingRequestStyling_rr_backgroundColor, UNSUPPORTED_RESOURCE));
 
         arr.recycle();
     }
@@ -232,6 +226,49 @@ public class RatingRequestView extends FrameLayout {
         feedbackView.setText(mainText, acceptButtonText, declineButtonText);
     }
     //endregion Text
+
+    //region Styling
+    public void setBackgroundColor(int color){
+        if (color == UNSUPPORTED_RESOURCE)
+            return;
+
+        handler.setBackgroundColor(color);
+
+        nudgeView.setBackgroundColor(color);
+        feedbackView.setBackgroundColor(color);
+        ratingView.setBackgroundColor(color);
+    }
+
+    public void setTextColor(int color){
+        nudgeView.setTextColor(color);
+        ratingView.setTextColor(color);
+        feedbackView.setTextColor(color);
+    }
+
+    public void setAcceptButtonBackgroundDrawable(Drawable drawable){
+        nudgeView.setAcceptButtonBackgroundDrawable(drawable);
+        ratingView.setAcceptButtonBackgroundDrawable(drawable);
+        feedbackView.setAcceptButtonBackgroundDrawable(drawable);
+    }
+
+    public void setAcceptButtonTextColor(int color){
+        nudgeView.setAcceptButtonTextColor(color);
+        ratingView.setAcceptButtonTextColor(color);
+        feedbackView.setAcceptButtonTextColor(color);
+    }
+
+    public void setDeclineButtonBackgroundDrawable(Drawable drawable){
+        nudgeView.setDeclineButtonBackgroundDrawable(drawable);
+        ratingView.setDeclineButtonBackgroundDrawable(drawable);
+        feedbackView.setDeclineButtonBackgroundDrawable(drawable);
+    }
+
+    public void setDeclineButtonTextColor(int color){
+        nudgeView.setDeclineButtonTextColor(color);
+        ratingView.setDeclineButtonTextColor(color);
+        feedbackView.setDeclineButtonTextColor(color);
+    }
+    //endregion Styling
 
     public int getState(){
         return state;
