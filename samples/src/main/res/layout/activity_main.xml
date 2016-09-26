@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/root"
@@ -7,22 +8,55 @@
     android:layout_height="match_parent"
     tools:context="com.volen.ratingraquest.samples.MainActivity">
 
-    <com.volen.ratingrequest.RatingRequestView
-        android:id="@+id/rating_request"
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/appbar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:rr_backgroundColor="@color/colorPrimaryDark"
-        app:rr_textColor="@color/white"
-        app:rr_nudgeMainText="Enjoying App?"
-        app:rr_nudgeAcceptBtnText="Yes"
-        app:rr_nudgeDeclineBtnText="Not really"
-        app:rr_ratingMainText="How about a rating in the Google Play then?"
-        app:rr_ratingAcceptBtnText="Yes, sure"
-        app:rr_ratingDeclineBtnText="No, thanks"
-        app:rr_feedbackMainText="Would you mind giving us some feedback?"
-        app:rr_feedbackAcceptBtnText="Yes, sure"
-        app:rr_feedbackDeclineBtnText="No, thanks"
-        app:rr_showAnimation="@anim/show_from_bottom"
-        android:layout_alignParentBottom="true"/>
+        android:layout_height="@dimen/toolbar_expanded_height"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        android:fitsSystemWindows="true">
+
+        <android.support.design.widget.CollapsingToolbarLayout
+            android:id="@+id/collapsing_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed"
+            android:fitsSystemWindows="true"
+            app:contentScrim="?attr/colorPrimary"
+            app:expandedTitleMarginBottom="@dimen/toolbar_title_margin_bottom"
+            app:expandedTitleMarginEnd="@dimen/toolbar_text_padding_end"
+            app:expandedTitleMarginStart="@dimen/toolbar_text_padding_start"
+            app:expandedTitleTextAppearance="@style/ExpandedAppBarTitle">
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/toolbar_subtitle_size"
+                android:textColor="@android:color/white"
+                android:layout_marginBottom="@dimen/toolbar_subtitle_margin_bottom"
+                android:layout_marginRight="@dimen/toolbar_text_padding_end"
+                android:layout_marginLeft="@dimen/toolbar_text_padding_start"
+                app:layout_collapseMode="parallax"
+                android:layout_gravity="bottom"
+                android:text="@string/examples_of_using"/>
+
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:title="@string/app_name"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+                app:layout_collapseMode="pin"/>
+
+        </android.support.design.widget.CollapsingToolbarLayout>
+
+    </android.support.design.widget.AppBarLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/examples_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        app:layout_anchor="@id/appbar"/>
     
-</RelativeLayout>
+</android.support.design.widget.CoordinatorLayout>
