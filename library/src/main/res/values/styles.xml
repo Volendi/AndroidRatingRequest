@@ -8,6 +8,7 @@
 
     <style name="RateDialog.Handler">
         <item name="android:background">@color/default_background</item>
+        <item name="android:layout_gravity">center</item>
     </style>
 
     <style name="RateDialog.Text">
