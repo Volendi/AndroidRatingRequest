@@ -11,6 +11,7 @@ import android.graphics.drawable.GradientDrawable;
 import android.graphics.drawable.ShapeDrawable;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -303,5 +304,10 @@ public class RatingRequestDialogItem extends LinearLayout {
 
     private RatingRequestDialogItem getView(){
         return this;
+    }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        return true;
     }
 }

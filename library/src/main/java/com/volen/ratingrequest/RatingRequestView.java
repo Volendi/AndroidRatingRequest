@@ -9,6 +9,7 @@ import android.support.annotation.IntDef;
 import android.support.annotation.MainThread;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -436,5 +437,10 @@ public class RatingRequestView extends FrameLayout {
 
     protected RatingRequestView getView(){
         return this;
+    }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        return true;
     }
 }
