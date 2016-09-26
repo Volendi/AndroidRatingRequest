@@ -10,11 +10,11 @@
     <com.volen.ratingrequest.RatingRequestDialogItem
         android:id="@+id/rating"
         style="@style/RateDialog.Handler"
-        android:visibility="gone"/>
+        android:visibility="invisible"/>
 
     <com.volen.ratingrequest.RatingRequestDialogItem
         android:id="@+id/feedback"
         style="@style/RateDialog.Handler"
-        android:visibility="gone"/>
+        android:visibility="invisible"/>
 
 </FrameLayout>
