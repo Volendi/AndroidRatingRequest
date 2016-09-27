@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:id="@+id/content"
+    android:layout_height="match_parent">
+
+    <com.volen.ratingrequest.RatingRequestView
+        android:id="@+id/rating_request"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:rr_backgroundColor="@color/colorPrimaryDark"
+        app:rr_textColor="@color/white"
+        app:rr_nudgeMainText="@string/nudge_question"
+        app:rr_nudgeAcceptBtnText="@string/nudge_accept"
+        app:rr_nudgeDeclineBtnText="@string/nudge_decline"
+        app:rr_ratingMainText="@string/rate_question"
+        app:rr_ratingAcceptBtnText="@string/rate_accept"
+        app:rr_ratingDeclineBtnText="@string/rate_decline"
+        app:rr_feedbackMainText="@string/feedback_question"
+        app:rr_feedbackAcceptBtnText="@string/feedback_accept"
+        app:rr_feedbackDeclineBtnText="@string/feedback_decline"
+        android:visibility="gone"/>
+
+</LinearLayout>

@@ -37,6 +37,9 @@ public class MainActivity extends AppCompatActivity {
     private void initExamplesList(){
         ArrayList<Example> examples = new ArrayList<>();
 
+        examples.add(new Example(getString(R.string.basic_example_name), getString(R.string.basic_example_description),
+                BasicExampleActivity.class));
+
         initExamplesRecyclerView(examples);
     }
 

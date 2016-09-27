@@ -1,5 +1,25 @@
 <resources>
     <string name="app_name">Rating request</string>
 
+    <string name="show">Show</string>
+    <string name="hide">Hide</string>
+
+    <string name="decline_rating">User has declined rating</string>
+    <string name="decline_feedback">User has declined feedback</string>
+
     <string name="examples_of_using">Examples of using</string>
+    
+    <string name="basic_example_name">Basic example</string>
+    <string name="basic_example_description">It is simple example of using rating request</string>
+
+    <!--Rating request-->
+    <string name="nudge_question">Enjoying app?</string>
+    <string name="nudge_accept">Yes</string>
+    <string name="nudge_decline">Not really</string>
+    <string name="rate_question">How about a rating in the Google Play then?</string>
+    <string name="rate_accept">Yes, sure</string>
+    <string name="rate_decline">No, thanks</string>
+    <string name="feedback_question">Would you mind giving us some feedback?</string>
+    <string name="feedback_accept">Ok, sure</string>
+    <string name="feedback_decline">No, thanks</string>
 </resources>

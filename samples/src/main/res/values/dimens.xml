@@ -5,6 +5,8 @@
 
     <dimen name="standard_margin">16dp</dimen>
 
+    <dimen name="standard_elevation">10dp</dimen>
+
     <!--Toolbar-->
     <dimen name="toolbar_expanded_height">200dp</dimen>
     <dimen name="toolbar_text_padding_start">48dp</dimen>

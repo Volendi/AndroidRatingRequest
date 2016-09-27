@@ -20,6 +20,10 @@
 
         </activity>
 
+        <activity android:name=".BasicExampleActivity"
+            android:parentActivityName=".MainActivity"
+            android:label="@string/basic_example_name"/>
+
     </application>
 
 </manifest>
