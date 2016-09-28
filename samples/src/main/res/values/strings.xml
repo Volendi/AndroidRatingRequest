@@ -13,6 +13,8 @@
     <string name="basic_example_description">It is simple example of using rating request</string>
     <string name="custom_show_hide_animation_example_name">Custom show/hide animation example</string>
     <string name="custom_show_hide_animation_example_description">It shows how to set custom show and hide animation to create a snackbar like appearance animation</string>
+    <string name="custom_state_switch_animation_example_name">Custom switch state animation example</string>
+    <string name="custom_state_switch_animation_example_description">It shows how to set custom switch request state animation</string>
 
     <!--Rating request-->
     <string name="nudge_question">Enjoying app?</string>

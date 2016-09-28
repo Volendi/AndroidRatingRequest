@@ -28,6 +28,10 @@
             android:parentActivityName=".MainActivity"
             android:label="@string/custom_show_hide_animation_example_name"/>
 
+        <activity android:name=".CustomStateSwitchAnimationExampleActivity"
+            android:parentActivityName=".MainActivity"
+            android:label="@string/custom_state_switch_animation_example_name"/>
+
     </application>
 
 </manifest>
