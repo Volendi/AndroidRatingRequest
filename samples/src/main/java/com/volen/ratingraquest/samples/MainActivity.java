@@ -39,6 +39,9 @@ public class MainActivity extends AppCompatActivity {
 
         examples.add(new Example(getString(R.string.basic_example_name), getString(R.string.basic_example_description),
                 BasicExampleActivity.class));
+        examples.add(new Example(getString(R.string.custom_show_hide_animation_example_name),
+                getString(R.string.custom_show_hide_animation_example_description),
+                CustomShowHideAnimationExample.class));
 
         initExamplesRecyclerView(examples);
     }

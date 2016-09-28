@@ -24,6 +24,10 @@
             android:parentActivityName=".MainActivity"
             android:label="@string/basic_example_name"/>
 
+        <activity android:name=".CustomShowHideAnimationExample"
+            android:parentActivityName=".MainActivity"
+            android:label="@string/custom_show_hide_animation_example_name"/>
+
     </application>
 
 </manifest>
