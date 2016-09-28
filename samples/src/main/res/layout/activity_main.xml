@@ -22,7 +22,6 @@
         app:rr_feedbackMainText="Would you mind giving us some feedback?"
         app:rr_feedbackAcceptBtnText="Yes, sure"
         app:rr_feedbackDeclineBtnText="No, thanks"
-        app:rr_showAnimation="@anim/show_from_bottom"
-        android:layout_alignParentBottom="true"/>
+        android:elevation="10dp"/>
     
 </RelativeLayout>

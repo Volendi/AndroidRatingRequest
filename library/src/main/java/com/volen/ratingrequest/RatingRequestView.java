@@ -36,6 +36,8 @@ public class RatingRequestView extends FrameLayout {
 
     protected final int DEFAULT_SHOW_ANIM_RES_ID = R.anim.rr_default_show_anim;
     protected final int DEFAULT_HIDE_ANIM_RES_ID = R.anim.rr_default_hide_anim;
+
+    protected final int DEFAULT_BACKGROUND_COLOR = getContext().getResources().getColor(R.color.default_background);
     //endregion DefaultResourcesIds
 
     @IntDef({ NUDGE, FEEDBACK, RATING })
@@ -77,6 +79,7 @@ public class RatingRequestView extends FrameLayout {
         initUi();
         initActions();
         initDefaultAnimations();
+        initDefaultStyles();
     }
 
     private void initUi(){
@@ -133,6 +136,10 @@ public class RatingRequestView extends FrameLayout {
         hideAnimation = AnimationUtils.loadAnimation(getContext(), DEFAULT_HIDE_ANIM_RES_ID);
 
         switchStateAnimationDelay = getContext().getResources().getInteger(R.integer.default_switch_state_anim_delay);
+    }
+
+    private void initDefaultStyles(){
+        setBackgroundColor(DEFAULT_BACKGROUND_COLOR);
     }
 
     //region Attrs
@@ -238,6 +245,8 @@ public class RatingRequestView extends FrameLayout {
     public void setBackgroundColor(int color){
         if (color == UNSUPPORTED_RESOURCE)
             return;
+
+        super.setBackgroundColor(color);
 
         handler.setBackgroundColor(color);
 
