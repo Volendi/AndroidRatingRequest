@@ -15,6 +15,8 @@
     <string name="custom_show_hide_animation_example_description">It shows how to set custom show and hide animation to create a snackbar like appearance animation</string>
     <string name="custom_state_switch_animation_example_name">Custom switch state animation example</string>
     <string name="custom_state_switch_animation_example_description">It shows how to set custom switch request state animation</string>
+    <string name="advanced_styling_example_name">Advanced styling</string>
+    <string name="advanced_styling_example_description">It shows how customize rating request style</string>
 
     <!--Rating request-->
     <string name="nudge_question">Enjoying app?</string>

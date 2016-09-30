@@ -32,6 +32,10 @@
             android:parentActivityName=".MainActivity"
             android:label="@string/custom_state_switch_animation_example_name"/>
 
+        <activity android:name=".AdvancedStylingExampleActivity"
+            android:parentActivityName=".MainActivity"
+            android:label="@string/advanced_styling_example_name"/>
+
     </application>
 
 </manifest>

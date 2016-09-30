@@ -43,7 +43,11 @@ public class MainActivity extends AppCompatActivity {
                 getString(R.string.custom_show_hide_animation_example_description),
                 CustomShowHideAnimationExample.class));
         examples.add(new Example(getString(R.string.custom_state_switch_animation_example_name),
-                getString(R.string.custom_state_switch_animation_example_description), CustomStateSwitchAnimationExampleActivity.class));
+                getString(R.string.custom_state_switch_animation_example_description),
+                CustomStateSwitchAnimationExampleActivity.class));
+        examples.add(new Example(getString(R.string.advanced_styling_example_name),
+                getString(R.string.advanced_styling_example_description),
+                AdvancedStylingExampleActivity.class));
 
         initExamplesRecyclerView(examples);
     }
