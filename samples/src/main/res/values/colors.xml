@@ -6,5 +6,7 @@
     
     <color name="white">#FFFFFF</color>
 
+    <color name="dark_transparent">#22000000</color>
+
     <color name="rating_view_background_dark">#3A3A3A</color>
 </resources>

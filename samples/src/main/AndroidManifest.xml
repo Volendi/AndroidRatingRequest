@@ -36,6 +36,11 @@
             android:parentActivityName=".MainActivity"
             android:label="@string/advanced_styling_example_name"/>
 
+        <activity android:name=".RecyclerViewExampleActivity"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppThemeNoTitleBar.TransparentStatusBar"
+            android:label="@null"/>
+
     </application>
 
 </manifest>

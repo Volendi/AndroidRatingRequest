@@ -11,6 +11,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.volen.ratingraquest.samples.util.RatingRequestActions;
 import com.volen.ratingrequest.RatingRequestView;
 
 public class BasicExampleActivity extends AppCompatActivity{
@@ -21,15 +22,15 @@ public class BasicExampleActivity extends AppCompatActivity{
         @Override
         public void onRating(RatingRequestView view) {
             //Hide rating request with animation or not if it is needed
-            ratingRequestView.hideAnimate();
+            view.hideAnimate();
 
-            showMarketActivity();
+            RatingRequestActions.showMarketActivity(BasicExampleActivity.this);
         }
 
         @Override
         public void onRatingDeclined(RatingRequestView view) {
             //Hide rating request with animation or not if it is needed
-            ratingRequestView.hideAnimate();
+            view.hideAnimate();
 
             Snackbar.make(findViewById(R.id.content), R.string.decline_rating, Snackbar.LENGTH_LONG).show();
         }
@@ -37,15 +38,15 @@ public class BasicExampleActivity extends AppCompatActivity{
         @Override
         public void onFeedback(RatingRequestView view) {
             //Hide rating request with animation or not if it is needed
-            ratingRequestView.hideAnimate();
+            view.hideAnimate();
 
-            showFeedback();
+            RatingRequestActions.showFeedback(BasicExampleActivity.this);
         }
 
         @Override
         public void onFeedbackDeclined(RatingRequestView view) {
             //Hide rating request with animation or not if it is needed
-            ratingRequestView.hideAnimate();
+            view.hideAnimate();
 
             Snackbar.make(findViewById(R.id.content), R.string.decline_feedback, Snackbar.LENGTH_LONG).show();
         }
@@ -60,7 +61,7 @@ public class BasicExampleActivity extends AppCompatActivity{
         initShowHideRatingRequestButton();
     }
 
-    private  void initShowHideRatingRequestButton(){
+    protected void initShowHideRatingRequestButton(){
         findViewById(R.id.content).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -77,22 +78,5 @@ public class BasicExampleActivity extends AppCompatActivity{
 
     protected int getLayoutId(){
         return R.layout.activity_basic_example;
-    }
-
-    protected void showFeedback(){
-        startActivity(new Intent(Intent.ACTION_VIEW,
-                Uri.parse("https://github.com/Volendi/AndroidRatingRequest/issues")));
-    }
-
-    protected void showMarketActivity(){
-        Uri uri = Uri.parse("market://details?id=" + getPackageName());
-        Intent goToMarket = new Intent(Intent.ACTION_VIEW, uri);
-
-        try {
-            startActivity(goToMarket);
-        } catch (ActivityNotFoundException e) {
-            startActivity(new Intent(Intent.ACTION_VIEW,
-                    Uri.parse("http://play.google.com/store/apps/details?id=" + getPackageName())));
-        }
     }
 }

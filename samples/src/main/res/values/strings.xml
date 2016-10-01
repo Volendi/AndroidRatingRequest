@@ -17,6 +17,8 @@
     <string name="custom_state_switch_animation_example_description">It shows how to set custom switch request state animation</string>
     <string name="advanced_styling_example_name">Advanced styling</string>
     <string name="advanced_styling_example_description">It shows how customize rating request style</string>
+    <string name="recycler_view_example_name">Recycler view example</string>
+    <string name="recycler_view_example_description">It shows how to implement rating request inside RecyclerView</string>
 
     <!--Rating request-->
     <string name="nudge_question">Enjoying app?</string>

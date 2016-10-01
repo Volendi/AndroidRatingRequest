@@ -48,6 +48,8 @@ public class MainActivity extends AppCompatActivity {
         examples.add(new Example(getString(R.string.advanced_styling_example_name),
                 getString(R.string.advanced_styling_example_description),
                 AdvancedStylingExampleActivity.class));
+        examples.add(new Example(getString(R.string.recycler_view_example_name),
+                getString(R.string.advanced_styling_example_description), RecyclerViewExampleActivity.class));
 
         initExamplesRecyclerView(examples);
     }
