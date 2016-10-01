@@ -10,8 +10,6 @@
         android:id="@+id/rating_request"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:rr_backgroundColor="@color/colorPrimaryDark"
-        app:rr_textColor="@color/white"
         app:rr_nudgeMainText="@string/nudge_question"
         app:rr_nudgeAcceptBtnText="@string/nudge_accept"
         app:rr_nudgeDeclineBtnText="@string/nudge_decline"
