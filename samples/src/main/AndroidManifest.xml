@@ -41,6 +41,10 @@
             android:theme="@style/AppThemeNoTitleBar.TransparentStatusBar"
             android:label="@null"/>
 
+        <activity android:name=".RulesExampleActivity"
+            android:parentActivityName=".MainActivity"
+            android:label="@string/rules_example_name"/>
+
     </application>
 
 </manifest>
