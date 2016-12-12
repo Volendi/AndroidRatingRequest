@@ -362,6 +362,10 @@ public class RatingRequestView extends FrameLayout {
         feedbackView.setShowAnimation(animation);
     }
 
+    public void setSwitchStateAnimationDelay(int delay){
+        this.switchStateAnimationDelay = delay;
+    }
+
     private void playShowAnimation() {
         hideAnimation.cancel();
         startAnimation(showAnimation);
