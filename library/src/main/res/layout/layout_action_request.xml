@@ -3,18 +3,18 @@
     android:id="@+id/handler"
     style="@style/RateDialog.Handler">
 
-    <com.volen.ratingrequest.RatingRequestDialogItem
+    <com.volen.ratingrequest.SingleQuestionView
         android:id="@+id/nudge"
         style="@style/RateDialog.Handler"/>
 
-    <com.volen.ratingrequest.RatingRequestDialogItem
-        android:id="@+id/rating"
+    <com.volen.ratingrequest.SingleQuestionView
+        android:id="@+id/single_question_view"
         style="@style/RateDialog.Handler"
-        android:visibility="invisible"/>
+        android:visibility="gone"/>
 
-    <com.volen.ratingrequest.RatingRequestDialogItem
+    <com.volen.ratingrequest.SingleQuestionView
         android:id="@+id/feedback"
         style="@style/RateDialog.Handler"
-        android:visibility="invisible"/>
+        android:visibility="gone"/>
 
 </FrameLayout>

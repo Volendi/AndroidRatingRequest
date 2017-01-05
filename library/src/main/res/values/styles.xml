@@ -8,7 +8,6 @@
 
     <style name="RateDialog.Handler">
         <item name="android:background">@color/default_background</item>
-        <item name="android:layout_gravity">center</item>
     </style>
 
     <style name="RateDialog.Text">
@@ -16,7 +15,8 @@
         <item name="android:textSize">@dimen/text_size</item>
         <item name="android:gravity">center</item>
         <item name="android:textAlignment">center</item>
-        <item name="android:padding">@dimen/text_margin</item>
+        <item name="android:paddingTop">@dimen/text_margin</item>
+        <item name="android:paddingBottom">@dimen/text_margin</item>
     </style>
 
     <style name="RateDialog.Button">

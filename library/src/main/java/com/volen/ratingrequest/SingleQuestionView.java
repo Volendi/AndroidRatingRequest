@@ -2,17 +2,9 @@ package com.volen.ratingrequest;
 
 import android.content.Context;
 import android.content.res.TypedArray;
-import android.graphics.Color;
-import android.graphics.ColorFilter;
-import android.graphics.ImageFormat;
-import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
-import android.graphics.drawable.GradientDrawable;
-import android.graphics.drawable.ShapeDrawable;
-import android.support.annotation.ColorInt;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -20,9 +12,11 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-public class RatingRequestDialogItem extends LinearLayout {
+public class SingleQuestionView extends LinearLayout {
+    public static final int NO_SUCH_COLOR = -1;
+
     private View handler;
-    private TextView text;
+    private TextView questionTextView;
     private Button acceptButton;
     private Button declineButton;
 
@@ -32,24 +26,20 @@ public class RatingRequestDialogItem extends LinearLayout {
     //region DefaultResourcesIds
     protected final int DEFAULT_SHOW_ANIM_RES_ID = R.anim.rr_default_show_anim;
     protected final int DEFAULT_HIDE_ANIM_RES_ID = R.anim.rr_default_hide_anim;
-
-    protected final int DEFAULT_BACKGROUND_COLOR = getContext().getResources().getColor(R.color.default_background);
-    protected final int DEFAULT_TEXT_COLOR = getContext().getResources().getColor(R.color.default_text);
-    protected final int DEFAULT_BUTTONS_COLOR =  getContext().getResources().getColor(R.color.default_buttons);
     //endregion DefaultResourcesIds
 
     private OnDecisionListener onDecisionListener;
 
     public interface OnDecisionListener{
-        void onAccept(RatingRequestDialogItem view);
-        void onDecline(RatingRequestDialogItem view);
+        void onAccept(SingleQuestionView view);
+        void onDecline(SingleQuestionView view);
     }
 
-    public RatingRequestDialogItem(Context context) {
+    public SingleQuestionView(Context context) {
         this(context, null);
     }
 
-    public RatingRequestDialogItem(Context context, AttributeSet attrs) {
+    public SingleQuestionView(Context context, AttributeSet attrs) {
         super(context, attrs);
 
         init();
@@ -58,34 +48,36 @@ public class RatingRequestDialogItem extends LinearLayout {
 
     //region Init
     private void init(){
-        inflate(getContext(), R.layout.rating_request_dialog_item, this);
+        inflate(getContext(), R.layout.single_question_dialog_item, this);
 
-        initUi();
-        initActions();
+        initViews();
+        initActionsForButtons();
         initDefaultAnimations();
     }
 
-    private void initUi(){
+    private void initViews(){
         handler = findViewById(R.id.handler);
-        text = (TextView) findViewById(R.id.text);
+        questionTextView = (TextView) findViewById(R.id.text);
         acceptButton = (Button) findViewById(R.id.accept_btn);
         declineButton = (Button) findViewById(R.id.decline_btn);
     }
 
-    private void initActions(){
+    private void initActionsForButtons(){
         acceptButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (onDecisionListener != null)
-                    onDecisionListener.onAccept(getView());
+                if (onDecisionListener != null) {
+                    onDecisionListener.onAccept(getThisView());
+                }
             }
         });
 
         declineButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (onDecisionListener != null)
-                    onDecisionListener.onDecline(getView());
+                if (onDecisionListener != null) {
+                    onDecisionListener.onDecline(getThisView());
+                }
             }
         });
     }
@@ -97,8 +89,9 @@ public class RatingRequestDialogItem extends LinearLayout {
 
     //region Attrs
     private void parseAttrs(AttributeSet attrs){
-        if (attrs == null)
+        if (attrs == null) {
             return;
+        }
 
         parseTextAttrs(attrs);
         parseStylingAttrs(attrs);
@@ -110,7 +103,7 @@ public class RatingRequestDialogItem extends LinearLayout {
         if (arr == null)
             return;
 
-        setText(arr.getString(R.styleable.RatingRequestDialogItemText_rr_mainText),
+        setViewTexts(arr.getString(R.styleable.RatingRequestDialogItemText_rr_mainText),
                 arr.getString(R.styleable.RatingRequestDialogItemText_rr_acceptBtnText),
                 arr.getString(R.styleable.RatingRequestDialogItemText_rr_declineBtnText));
 
@@ -124,88 +117,87 @@ public class RatingRequestDialogItem extends LinearLayout {
             return;
 
         setBackgroundColor(arr.getColor(R.styleable.RatingRequestStyling_rr_backgroundColor,
-                DEFAULT_BACKGROUND_COLOR));
+                NO_SUCH_COLOR));
         setTextColor(arr.getColor(R.styleable.RatingRequestStyling_rr_textColor,
-                DEFAULT_TEXT_COLOR));
+                NO_SUCH_COLOR));
 
         setAcceptButtonBackgroundDrawable(arr.getDrawable(R.styleable.RatingRequestStyling_rr_acceptButtonBackground));
         setAcceptButtonTextColor(arr.getColor(R.styleable.RatingRequestStyling_rr_acceptButtonTextColor,
-                DEFAULT_BACKGROUND_COLOR));
+                NO_SUCH_COLOR));
 
         setDeclineButtonBackgroundDrawable(arr.getDrawable(R.styleable.RatingRequestStyling_rr_declineButtonBackground));
         setDeclineButtonTextColor(arr.getColor(R.styleable.RatingRequestStyling_rr_declineButtonTextColor,
-                DEFAULT_TEXT_COLOR));
+                NO_SUCH_COLOR));
 
         arr.recycle();
     }
     //endregion Attrs
     //endregion Init
 
-    //region Text
-    public void setText(@Nullable String mainText, @Nullable String acceptButtonText,
-                        @Nullable String declineButtonText){
-        if (mainText != null)
+    //region Set views texts
+    public void setViewTexts(@Nullable String mainText, @Nullable String acceptButtonText,
+                             @Nullable String declineButtonText){
+        if (mainText != null) {
             setMainText(mainText);
+        }
 
-        if (acceptButtonText != null)
+        if (acceptButtonText != null) {
             setAcceptButtonText(acceptButtonText);
+        }
 
-        if (declineButtonText != null)
+        if (declineButtonText != null) {
             setDeclineButtonText(declineButtonText);
-    }
-
-    public void setText(int mainTextResId, int acceptButtonTextResId,
-                        int declineButtonTextResId){
-        setMainText(mainTextResId);
-        setAcceptButtonText(acceptButtonTextResId);
-        setDeclineButtonText(declineButtonTextResId);
+        }
     }
 
     public void setMainText(CharSequence text){
-        this.text.setText(text);
-    }
-
-    public void setMainText(int resId){
-        this.text.setText(resId);
-    }
-
-    public CharSequence getMainText(){
-        return text.getText();
+        this.questionTextView.setText(text);
     }
 
     public void setAcceptButtonText(CharSequence text){
         acceptButton.setText(text);
     }
 
-    public void setAcceptButtonText(int resId){
-        acceptButton.setText(resId);
-    }
-
-    public CharSequence getAcceptButtonText(){
-        return acceptButton.getText();
-    }
-
     public void setDeclineButtonText(CharSequence text){
         declineButton.setText(text);
+    }
+
+    // region Set texts via resource ids.
+    public void setViewTexts(int mainTextResId, int acceptButtonTextResId,
+                             int declineButtonTextResId){
+        setMainText(mainTextResId);
+        setAcceptButtonText(acceptButtonTextResId);
+        setDeclineButtonText(declineButtonTextResId);
+    }
+
+    public void setMainText(int resId){
+        this.questionTextView.setText(resId);
+    }
+
+    public void setAcceptButtonText(int resId){
+        acceptButton.setText(resId);
     }
 
     public void setDeclineButtonText(int resId){
         declineButton.setText(resId);
     }
-
-    public CharSequence getDeclineButtonText(){
-        return declineButton.getText();
-    }
-    //endregion Text
+    // endregion Set texts via resource ids.
+    //endregion Set views texts
 
     //region Styling
-    public void setBackgroundColor(@ColorInt int color){
+    public void setBackgroundColor(int color){
+        if (color == NO_SUCH_COLOR)
+            return;
+
         handler.setBackgroundColor(color);
         acceptButton.setTextColor(color);
     }
 
-    public void setTextColor(@ColorInt int color){
-        text.setTextColor(color);
+    public void setTextColor(int color){
+        if (color == NO_SUCH_COLOR)
+            return;
+
+        questionTextView.setTextColor(color);
     }
 
     public void setAcceptButtonBackgroundDrawable(Drawable drawable){
@@ -213,7 +205,10 @@ public class RatingRequestDialogItem extends LinearLayout {
             acceptButton.setBackgroundDrawable(drawable);
     }
 
-    public void setAcceptButtonTextColor(@ColorInt int color){
+    public void setAcceptButtonTextColor(int color){
+        if (color == NO_SUCH_COLOR)
+            return;
+
         acceptButton.setTextColor(color);
     }
 
@@ -223,6 +218,9 @@ public class RatingRequestDialogItem extends LinearLayout {
     }
 
     public void setDeclineButtonTextColor(int color){
+        if (color == NO_SUCH_COLOR)
+            return;
+
         declineButton.setTextColor(color);
     }
     //endregion Styling
@@ -293,12 +291,7 @@ public class RatingRequestDialogItem extends LinearLayout {
         this.onDecisionListener = onDecisionListener;
     }
 
-    private RatingRequestDialogItem getView(){
+    private SingleQuestionView getThisView(){
         return this;
-    }
-
-    @Override
-    public boolean onTouchEvent(MotionEvent event) {
-        return true;
     }
 }
